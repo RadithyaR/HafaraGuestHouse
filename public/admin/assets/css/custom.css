@@ -1,0 +1,48 @@
+.btn-primary {
+    background-color: #00523B !important;
+    border-color: #00523B !important;
+}
+
+.btn-primary:hover {
+    background-color: #004530 !important;
+}
+
+a.font-bold {
+    color: #00523B !important;
+}
+
+a.font-bold:hover {
+    color: #003F2E !important;
+}
+
+
+.auth-title {
+    font-weight: 700;
+    color: #00523B
+}
+
+.auth-subtitle {
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: #00523B
+}
+
+#auth {
+    background-color: #00523B; /* Warna background utama */
+    min-height: 100vh;
+}
+
+#auth-left {
+    background-color: rgb(229, 229, 229);
+    padding: 50px;
+    border-radius: 12px;
+}
+
+#auth-right {
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+
+
