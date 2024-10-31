@@ -5,19 +5,30 @@
     @include('admin.css')
 </head>
 
-<body>
-    <!-- Sidebar Navigation start-->
-    @include('admin.sidebar')
-    <!-- Sidebar Navigation end-->
-    <div class="page-content">
-        <div class="page-header">
-            <div class="container-fluid">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2 class="h5 no-margin-bottom">Detail Booking</h2>
-                </div>
-            </div>
-        </div>
-        <section class="section">
+<body id="page-top">
+
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- sidebar -->
+        @include('admin.navigation.sidebar')
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                @include('admin.navigation.topbar')
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Check In</h1>
+                    </div>
+                    <section class="section">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Detail Booking</h5>
@@ -79,18 +90,28 @@
                             <label>Total Kamar Tersedia: {{ $roomscount }}</label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                        <button type="submit" class="btn btn-primary">Check In</button>
                     </form>
                 </div>
             </div>
 
         </section>
+                </div>
+                <!-- End page content -->
+
+        </div>
+        <!-- End Main Content -->
+    
+         <!-- Footer -->
+        @include('admin.navigation.footer')
+        <!-- End of Footer -->
+    
     </div>
+    <!-- End Contenct Wrapper -->
 
-
-    <!-- footer-->
-    @include('admin.footer')
-
+    </div>
+    <!--End Page Wrapper -->
+    @include('admin.navigation.script')
 </body>
 
 </html>

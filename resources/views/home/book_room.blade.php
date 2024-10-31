@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+   <head>
     <base href="/public">
-    @include('home.css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+      @include('home.css')
+      
 
-    <style>
-        label {
-            display: inline-block;
-            width: 200px;
-        }
+   </head>
+   <!-- body -->
+   <body>
+    
+    @include('home.header')
 
-        input {
-            width: 100%;
-        }
-    </style>
-</head>
-<!-- body -->
+   <!-- Breadcrumb Section Begin -->
+   <div class="breadcrumb-section">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="breadcrumb-text">
+                      <h2>Book Room</h2>
+                      <div class="bt-option">
+                          <a href="{{route('home')}}">Home</a>
+                          <span>Book Room</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Breadcrumb Section End -->
 
-<body class="main-layout">
-    <!-- loader  -->
-    <div class="loader_bg">
-        <div class="loader"><img src="images/loading.gif" alt="#" /></div>
-    </div>
-    <!-- end loader -->
-    <!-- header -->
-    <header>
-        @include('home.header')
-    </header>
-
-    <div class="our_room">
-        <div class="container">
+  <section class="room-details-section spad d-flex justify-content-center align-items-center">
+   <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     @if (session('error'))
@@ -40,9 +38,6 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                    <div class="titlepage">
-                        <h2>Book Room</h2>
-                    </div>
                 </div>
             </div>
             <div class="row">
@@ -63,7 +58,6 @@
                 </div>
 
                 <div class="col-md-4">
-                    <h1 style="font-size: 40px!important;">Book Room</h1>
                     <h4 style="font-size: 20px">Booking for room from {{ $checkin_date }} to {{ $checkout_date }}</h4>
 
                     <div>
@@ -111,7 +105,7 @@
                         </div>
                         <div class="form-group">
                             <label for="room_quantity">Jumlah kamar:</label>
-                            <select class="form-control" id="jumlah_kamar" name="jumlah_kamar" required>
+                            <select class="form-control mb-2" id="jumlah_kamar" name="jumlah_kamar" required>
                                 @for ($i = 1; $i <= $roomType->rooms_count; $i++)
                                     <option value="{{ $i }}">{{ $i }}</option>
                                 @endfor
@@ -147,34 +141,29 @@
 
             </div>
         </div>
-    </div>
+</section>
+    
+      <!-- end header inner -->
+      <!--  footer -->
+      @include('home.footer')
 
-    <!-- end header inner -->
-    <!--  footer -->
-    @include('home.footer')
-
-    <script type="text/javascript">
-        $(function() {
+      <script type="text/javascript">
+        $(function(){
             var dtToday = new Date();
             var month = dtToday.getMonth() + 1;
             var day = dtToday.getDate();
             var year = dtToday.getFullYear();
 
-            if (month < 10)
-                month = '0' + month.toString();
+            if(month < 10)
+            month = '0' + month.toString();
 
-            if (day < 10)
-                day = '0' + day.toString();
+            if(day < 10)
+            day = '0' + day.toString();
 
             var maxDate = year + '-' + month + '-' + day;
             $('#startDate').attr('min', maxDate);
             $('#endDate').attr('min', maxDate);
         });
-    </script>
-    <!--javascript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
-    </script>
-</body>
+      </script>
 
 </html>

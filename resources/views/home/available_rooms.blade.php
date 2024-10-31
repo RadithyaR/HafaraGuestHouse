@@ -4,11 +4,6 @@
 <head>
     @include('home.css')
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
-    </script>
 </head>
 <!-- body -->
 
@@ -46,7 +41,7 @@
                 <input type="date" name="checkin_date" value="{{ $checkin_date }}" required class="me-2">
                 <label for="checkout_date" class="me-2">Check-Out Date:</label>
                 <input type="date" name="checkout_date" value="{{ $checkout_date }}" required class="me-2">
-                <button type="submit" class="send_btn">Check Availability</button>
+                <button type="submit" class="button">Check Availability</button>
             </form>       
             <section class="rooms-section spad">
                 <div class="container">

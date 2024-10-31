@@ -6,7 +6,6 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\RoomController;
-use App\Http\Middleware\Admin;
 use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [AdminController::class, 'home'])->name('home');
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-Route::get('/home', [AdminController::class, 'dashboard'])->name('dashboard');
 Route::post('/add_roomType', [RoomController::class, 'add_roomType']);
 Route::get('/view_roomType', [RoomController::class, 'view_roomType'])->name('roomTypes.view');
 Route::post('/edit_roomType/{id}', [RoomController::class, 'edit_roomType']);
@@ -53,7 +52,7 @@ Route::get('/contact_us', [HomeController::class, 'contact_us'])->name('contact_
 Route::post('/contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::get('/message', [AdminController::class, 'message']);
-Route::get('/customer', [AdminController::class, 'customer'])->middleware(['auth', 'admin']);
+Route::get('/customer', [AdminController::class, 'customer']);
 Route::get('/owner', [AdminController::class, 'owner'])->middleware(['auth']);
 
 Route::get('/about', [HomeController::class, 'about'])->name('about_us');
@@ -72,6 +71,6 @@ Route::post('/update_user', [AdminController::class, 'update_user'])->name('upda
 
 Route::get('/bookings/export', [BookingController::class, 'export'])->name('bookings.export');
 Route::get('/report', [AdminController::class, 'report'])->name('report');
-
+Route::get('/report/print_invoice/{id}', [AdminController::class, 'print_invoice'])->name('report.print_invoice');
 
 

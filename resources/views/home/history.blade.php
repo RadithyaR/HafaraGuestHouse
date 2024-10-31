@@ -3,7 +3,9 @@
 
 <head>
     @include('home.css')
-
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.5.0/css/rowGroup.bootstrap.css">
     <style>
         /* Memperbesar dropdown untuk jumlah entri */
         .dataTables_length label {
@@ -54,22 +56,22 @@
     @include('home.header')
 
     <!-- Breadcrumb Section Begin -->
-   <div class="breadcrumb-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="breadcrumb-text">
-                    <h2>Our Rooms</h2>
-                    <div class="bt-option">
-                        <a href="{{route('home')}}">Home</a>
-                        <span>History</span>
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>Our Rooms</h2>
+                        <div class="bt-option">
+                            <a href="{{ route('home') }}">Home</a>
+                            <span>History</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Breadcrumb Section End -->
+    <!-- Breadcrumb Section End -->
 
     <div class="contact">
         <div class="container">
@@ -119,22 +121,28 @@
     @include('home.footer')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
-<script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/rowgroup/1.5.0/js/dataTables.rowGroup.js"></script>
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"
+        integrity="sha384-lZnR26hXnq+Q1s63G9+B+uxJcg3/P0pMAeLFi1u/xeIYzHrPjXjhhmS5u5g6FVdC" crossorigin="anonymous">
+    </script>
+    <script>
         $(document).ready(function() {
             $('#bookingTable').DataTable({
-                responsive: true, 
+                responsive: true,
                 rowGroup: {
-                    dataSrc: 2 
+                    dataSrc: 2
                 },
                 order: [
                     [2, 'asc']
-                ], 
-                pageLength: 10, 
-                lengthMenu: [5, 10, 20, 50], 
+                ],
+                pageLength: 10,
+                lengthMenu: [5, 10, 20, 50],
                 language: {
-                    lengthMenu: "Show _MENU_ entries", 
-                    search: "Search: ", 
+                    lengthMenu: "Show _MENU_ entries",
+                    search: "Search: ",
                     paginate: {
                         previous: "Previous",
                         next: "Next"

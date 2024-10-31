@@ -21,9 +21,7 @@
         <link href="css/owl.carousel.min.css" rel="stylesheet">
         <link href="css/slicknav.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
-        
-        <!-- Custom Livewire CSS -->
-        <link href="css/custom-livewire.css" rel="stylesheet">
+    
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -34,8 +32,7 @@
     <body class="font-sans antialiased">
         <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+        <div class="min-h-screen bg-gray-100">           
 
             <!-- Page Heading -->
             @if (isset($header))

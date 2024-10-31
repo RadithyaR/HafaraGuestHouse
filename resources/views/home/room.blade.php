@@ -58,7 +58,7 @@
                         <img src="room/{{$rooms->image}}" alt="{{$rooms->name}}">
                         <div class="ri-text">
                             <h4>{{$rooms->name}}</h4>
-                            <h3>159$<span>/Pernight</span></h3>
+                            <h3>Rp{{$rooms->price}}<span>/Pernight</span></h3>
                             <table>
                                 <tbody>
                                     <tr>

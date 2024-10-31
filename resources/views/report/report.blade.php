@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     @include('admin.css')
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.5.0/css/rowGroup.bootstrap.css">
     <style>
         /* Memperbesar dropdown untuk jumlah entri */
         .dataTables_length label {
@@ -50,67 +48,100 @@
             font-size: 18px;
         }
     </style>
-
-
 </head>
 
-<body class="main-layout">
-    @include('admin.sidebar')
+<body id="page-top">
 
-    <!--  contact -->
-    <div class="contact">
-        <div class="container">
-            <section class="section">
-                <div class="card">
-                    <div class="card-body">
-                        <!-- Tabel responsive -->
-                        <div class="table-responsive">
-                            <table id="example" class="display">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>#</th>
-                                        <th>User</th>
-                                        <th>Check-in</th>
-                                        <th>Check-out</th>
-                                        <th>Harga Total</th>
-                                        <th>Fine Reason</th>
-                                        <th>Fine Price</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Payment Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($bookings as $index => $booking)
-                                        <tr data-booking-detail="{{ $booking->bookingDetail }}">
-                                            <td><i class="ti ti-eye"></i></td>
-                                            <td>{{ $index + 1 }}</td>
-                                            <td>{{ $booking->user->name }}</td>
-                                            <td>{{ $booking->checkin_date }}</td>
-                                            <td>{{ $booking->checkout_date }}</td>
-                                            <td>{{ $booking->total_price }}</td>
-                                            <td>{{ $booking->remarks ?? '-' }}</td>
-                                            <td>{{ $booking->fine_price ?? '-' }}</td>
-                                            <td>{{ Carbon\Carbon::parse($booking->created_at)->format('d F Y') }}</td>
-                                            <td>{{ $booking->status }}</td>
-                                            <td>{{ $booking->payment->status }}</td>
-                                        </tr>
-                                    @endforeach
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-                                </tbody>
-                            </table>
+        <!-- sidebar -->
+        @include('admin.navigation.sidebar')
 
-                        </div>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                @include('admin.navigation.topbar')
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Message</h1>
                     </div>
-                </div>
-            </section>
-        </div>
-    </div>
+                    <section class="section">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Tabel responsive -->
+                                <div class="table-responsive">
+                                    <table id="example" class="display">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>#</th>
+                                                <th>User</th>
+                                                <th>Check-in</th>
+                                                <th>Check-out</th>
+                                                <th>Harga Total</th>
+                                                <th>Fine Reason</th>
+                                                <th>Fine Price</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th>Payment Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($bookings as $index => $booking)
+                                                <tr data-booking-detail="{{ $booking->bookingDetail }}">
+                                                    <td>
+                                                        <i class="bi bi-eye"></i>
+                                                    </td>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td>{{ $booking->user->name }}</td>
+                                                    <td>{{ $booking->checkin_date }}</td>
+                                                    <td>{{ $booking->checkout_date }}</td>
+                                                    <td>{{ $booking->total_price }}</td>
+                                                    <td>{{ $booking->remarks ?? '-' }}</td>
+                                                    <td>{{ $booking->fine_price ?? '-' }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($booking->created_at)->format('d F Y') }}
+                                                    </td>
+                                                    <td>{{ $booking->status }}</td>
+                                                    <td>{{ $booking->payment->status }}</td>
+                                                    <td>
+                                                        <a href="{{ route('report.print_invoice', $booking->id) }}"
+                                                            class="btn btn-primary"><i class="bi bi-receipt"></i></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
 
-    <!-- end contact -->
-    <!--  footer -->
-    @include('admin.footer')
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- End page content -->
+
+            </div>
+            <!-- End Main Content -->
+
+            <!-- Footer -->
+            @include('admin.navigation.footer')
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End Contenct Wrapper -->
+
+    </div>
+    <!--End Page Wrapper -->
+    @include('admin.navigation.script')
+    </script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery-3.0.0.min.js"></script>
@@ -166,7 +197,7 @@
                         '<td>' + (i + 1) + '</td>' + // Nomor urut
                         '<td>' + details[i].room.room_types.name + '</td>' + // Akses Room Type
                         '<td>' + details[i].room.room_number + '</td>' + // Akses Room Number
-                        '<td>' + details[i].jumlah_kamar + '</td>' + // Akses Jumlah Kamar
+                        '<td>' + 1 + '</td>' + // Akses Jumlah Kamar
                         '<td>' + details[i].room.room_types.price + '</td>' + // Akses Harga
                         '</tr>';
                 }

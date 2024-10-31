@@ -42,7 +42,7 @@ class BookingController extends Controller
             'rooms' => function ($query) use ($checkin_date, $checkout_date) {
                 $query->whereDoesntHave('bookings', function ($q) use ($checkin_date, $checkout_date) {
                     // Exclude rooms that have bookings overlapping with the selected dates
-                    $q->whereIn('status', ['pending', 'confirmed'])
+                    $q->whereIn('status', ['booked', 'checked_in'])
                         ->where(function ($q2) use ($checkin_date, $checkout_date) {
                         $q2->whereBetween('checkin_date', [$checkin_date, $checkout_date])
                             ->orWhereBetween('checkout_date', [$checkin_date, $checkout_date])
@@ -126,8 +126,9 @@ class BookingController extends Controller
                 'user_id' => $user,
                 'checkin_date' => $checkinDate,
                 'checkout_date' => $checkoutDate,
-                'status' => 'pending',
-                'total_price' => $totalPrice
+                'status' => 'booked',
+                'total_price' => $totalPrice,
+                'jumlah_kamar' => $cart->jumlah_kamar,
             ]);
 
             $payment = Payment::create([
@@ -148,7 +149,7 @@ class BookingController extends Controller
             // $cart->delete();
 
             foreach ($rooms as $room) {
-                $booking->rooms()->attach($room->id, ['jumlah_kamar' => $cart->jumlah_kamar]); // Assuming 1 room at a time
+                $booking->rooms()->attach($room->id); // Assuming 1 room at a time
             }
             $amountOfPrice += $totalPrice;
             $booking_ids[] = $booking->id;
@@ -207,7 +208,7 @@ class BookingController extends Controller
         $booking = Booking::find($id);
         $booking->remarks = $remarks;
         $booking->fine_price = $fine_price;
-        $booking->status = 'done';
+        $booking->status = 'checked_out';
         $booking->save();
         $bookingDetails = BookingDetail::where('booking_id', $booking->id)->get();
         // $rooms = Room::find($bookingDetails->room_id);
@@ -230,7 +231,7 @@ class BookingController extends Controller
         $booking = Booking::find($request->booking_id);
 
         // Update status booking menjadi confirmed
-        $booking->status = 'confirmed';
+        $booking->status = 'checked_in';
         $booking->save();
 
         // Looping untuk setiap kamar yang dipilih
@@ -265,7 +266,7 @@ class BookingController extends Controller
                 'rooms.status as rstatus',
                 'bookings.checkin_date',
                 'bookings.checkout_date',
-                'booking_detail.jumlah_kamar',
+                'bookings.jumlah_kamar',
                 'bookings.status'
             )
             ->where('bookings.id', $id)
@@ -291,7 +292,7 @@ class BookingController extends Controller
                 'rooms.status as rstatus',
                 'bookings.checkin_date',
                 'bookings.checkout_date',
-                'booking_detail.jumlah_kamar',
+                'bookings.jumlah_kamar',
                 'bookings.status'
             )
             ->where('bookings.id', $id)

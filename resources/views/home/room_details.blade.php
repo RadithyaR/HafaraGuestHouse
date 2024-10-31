@@ -38,9 +38,8 @@
                    <div class="rd-text">
                        <div class="rd-title">
                            <h3>{{$room->name}}</h3>
-                           <div class="rdt-right">
-                              
-                              <a href="#">Booking Now</a>
+                           <div class="rdt-right">    
+                              <a href="{{route("home")}}">Booking Now</a>
                            </div>
                        </div>
                        <h2>Rp{{$room->price}}<span>/Pernight</span></h2>

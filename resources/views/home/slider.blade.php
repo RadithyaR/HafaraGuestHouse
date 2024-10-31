@@ -16,11 +16,11 @@
                         @csrf
                         <div class="check-date">
                             <label for="date-in">Check In:</label>
-                            <input class="form-control" placeholder="dd/mm/yyyy" type="date" name="checkin_date" required>
+                            <input class="form-control"  type="date" name="checkin_date" required>
                         </div>
                         <div class="check-date">
                             <label for="date-out">Check Out:</label>
-                            <input class="form-control" placeholder="dd/mm/yyyy" type="date" name="checkout_date" required>
+                            <input class="form-control" type="date" name="checkout_date" required>
                         </div>
                         <button type="submit">Check Availability</button>
                     </form>

@@ -24,7 +24,8 @@ class Booking extends Model
         'status',
         'total_price',
         'remarks',
-        'fine_price'
+        'fine_price',
+        'jumlah_kamar',
     ];
 
     // Model DetailBooking

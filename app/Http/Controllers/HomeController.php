@@ -71,14 +71,15 @@ class HomeController extends Controller
                 'rooms.status as rstatus',
                 'bookings.checkin_date',
                 'bookings.checkout_date',
-                'booking_detail.jumlah_kamar',
+                'bookings.jumlah_kamar',
                 'bookings.status',
                 'payment.status as pstatus',
                 'bookings.total_price'
             )
             ->where('bookings.user_id', Auth::id())
+            ->groupBy('bookings.id', 'users.name', 'room_types.name', 'rooms.status', 'bookings.checkin_date', 'bookings.checkout_date', 'bookings.jumlah_kamar', 'bookings.status', 'payment.status', 'bookings.total_price')
             ->get();
-            
+
         return view('home.history', compact('bookings'));
     }
 

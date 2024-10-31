@@ -5,93 +5,115 @@
     @include('admin.css')
 </head>
 
-<body>
-    @include('admin.sidebar')
+<body id="page-top">
 
-    <div class="page-content">
-        <div class="page-header">
-            <div class="container-fluid">
-                <h2 class="h5 no-margin-bottom">Dashboard</h2>
-            </div>
-        </div>
-    </div>
-    <div class="page-content">
-        <section class="row">
-            <div class="col-12 col-lg-9">
-                <div class="row">
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon purple mb-2">
-                                            <i class="iconly-boldShow"></i>
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- sidebar -->
+        @include('admin.navigation.sidebar')
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                @include('admin.navigation.topbar')
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Bookings</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalBookings }}</div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Bookings</h6>
-                                        <h6 class="font-extrabold mb-0">{{ $totalBookings }}</h6>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon blue mb-2">
-                                            <i class="iconly-boldProfile"></i>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Customer</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalUsers }}</div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Customer</h6>
-                                        <h6 class="font-extrabold mb-0">{{ $totalUsers }}</h6>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon green mb-2">
-                                            <i class="iconly-boldAdd-User"></i>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Rooms</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalRooms }}</div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Rooms</h6>
-                                        <h6 class="font-extrabold mb-0">{{ $totalRooms }}</h6>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon red mb-2">
-                                            <i class="iconly-boldBookmark"></i>
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Message</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalContacts }}</div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Message</h6>
-                                        <h6 class="font-extrabold mb-0">{{ $totalContacts }}</h6>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-        </section>
-    </div>
+                <!-- End page content -->
 
-    @include('admin.footer')
+        </div>
+        <!-- End Main Content -->
+    
+         <!-- Footer -->
+         @include('admin.navigation.footer')
+        <!-- End of Footer -->
+    
+    </div>
+    <!-- End Contenct Wrapper -->
+
+    </div>
+    <!--End Page Wrapper -->
+    @include('admin.navigation.script')
 </body>
 
 </html>
