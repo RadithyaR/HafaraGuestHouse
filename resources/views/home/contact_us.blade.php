@@ -17,9 +17,9 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="contact-text">
-                        <h2>Contact Info</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua.</p>
+                        <h2>Kontak Info</h2>
+                        <p>Hafara Guesthouse Syariah berlokasi di Jalan Sawahan, Kota Padang, Sumatera Barat,
+                             dengan akses strategis ke berbagai destinasi wisata, pusat kuliner, dan area perbelanjaan di pusat Kota Padang.</p>
                         <table>
                             <tbody>
                                 <tr>
@@ -30,10 +30,6 @@
                                 <tr>
                                     <td class="c-o">Phone:</td>
                                     <td>(+62) 81384930391</td>
-                                </tr>
-                                <tr>
-                                    <td class="c-o">Email:</td>
-                                    <td>info.colorlib@gmail.com</td>
                                 </tr>
                             </tbody>
                         </table>

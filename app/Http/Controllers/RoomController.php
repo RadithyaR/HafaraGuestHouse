@@ -31,6 +31,7 @@ class RoomController extends Controller
 
         $data->facility = $request->facility;
         $data->capacity = $request->capacity;
+        $data->capacity_kids = $request->capacity_kids;
         $data->save();
 
         return redirect()->back();
@@ -44,13 +45,14 @@ class RoomController extends Controller
         $type->price = $request->price;
         $type->facility = $request->facility;
         $type->capacity = $request->capacity;
+        $type->capacity_kids = $request->capacity_kids;
         $image = $request->image;
         if($image){
             $imagename = time().'.'.$image->getClientOriginalExtension();
 
             $request->image->move('room', $imagename);
 
-            $image->image=$imagename;
+            $type->image=$imagename;
         }
 
         $type->save();

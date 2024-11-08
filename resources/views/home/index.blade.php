@@ -28,7 +28,7 @@
           <div class="hp-room-items">
               <div class="row">
     @foreach ($room as $rooms)
-                  <div class="col-lg-3 col-md-6">
+                  <div class="col-lg-3 col-md-6 mb-3">
                       <div class="hp-room-item set-bg" data-setbg="room/{{$rooms->image}}">
                           <div class="hr-text">
                               <h3>{{$rooms->name}}</h3>

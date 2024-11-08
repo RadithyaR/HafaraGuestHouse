@@ -29,4 +29,28 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
+<style>
+    .hs-item::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+    }
+    
+    /* Menyesuaikan kegelapan berdasarkan ukuran layar */
+    @media (max-width: 768px) {
+        .hs-item::after {
+            background: rgba(0, 0, 0, 0.6); /* Lebih gelap di mobile */
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .hs-item::after {
+            background: rgba(0, 0, 0, 0.7); /* Paling gelap di smartphone */
+        }
+    }
+    </style>

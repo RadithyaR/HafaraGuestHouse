@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{url('edit_roomType', $types->id)}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('roomTypes.edit', $types->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label>Type Name</label>
@@ -19,8 +19,12 @@
                         <input type="text" class="form-control" name="price" value="{{$types->price}}" required>
                     </div>
                     <div class="mb-3">
-                        <label>Capacity</label>
+                        <label>Capacity Adults</label>
                         <input type="number" class="form-control" name="capacity" value="{{$types->capacity}}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Capacity Kids</label>
+                        <input type="number" class="form-control" name="capacity_kids" value="{{$types->capacity_kids}}" required>
                     </div>
                     <div class="mb-3">
                         <label>Facility</label>

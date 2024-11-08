@@ -21,7 +21,7 @@
 
     <style>
         body {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/hafara.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/hafara2.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -61,7 +61,7 @@
         }
 
         .bg-register-image {
-            background-image: url('images/hafara.jpg');
+            background-image: url('images/hafara2.jpg');
             background-size: cover;
             background-position: center;
         }

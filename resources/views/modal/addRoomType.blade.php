@@ -20,8 +20,12 @@
                 <label>Facility</label>
                 <input type="text" class="form-control" name="facility" required>
             </div><div class="mb-3">
-                <label>Capacity</label>
+                <label>Capacity Adults</label>
                 <input type="number" class="form-control" name="capacity" required>
+            </div>
+            <div class="mb-3">
+              <label>Capacity Kids</label>
+              <input type="number" class="form-control" name="capacity_kids" required>
             </div>
             <div class="mb-3">
               <label for="">Upload Image</label>

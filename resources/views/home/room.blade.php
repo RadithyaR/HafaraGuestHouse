@@ -36,10 +36,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>Our Rooms</h2>
+                        <h2>Ruangan Kami</h2>
                         <div class="bt-option">
-                            <a href="./home.html">Home</a>
-                            <span>Rooms</span>
+                            <a href="{{route('home')}}">Beranda</a>
+                            <span>Ruangan</span>
                         </div>
                     </div>
                 </div>
@@ -62,8 +62,12 @@
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 3</td>
+                                        <td class="r-o">Capacity (Adults):</td>
+                                        <td>{{$rooms->capacity}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Capacity (Kids):</td>
+                                        <td>{{$rooms->capacity_kids}}</td>
                                     </tr>
                                     <tr>
                                         <td class="r-o">Services:</td>

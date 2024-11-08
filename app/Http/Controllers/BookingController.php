@@ -138,15 +138,7 @@ class BookingController extends Controller
                 'external_id' => $external_id,
                 'status' => 'pending',
                 'expired_at' => now()->addHour(1),
-            ]);
-
-            // // Attach the rooms to the booking and update their status to 'not_ready'
-            // $room = $rooms->first();
-            // $booking->rooms()->attach($room->id, ['jumlah_kamar' => $cart->jumlah_kamar]);
-            // // $room->update(['status' => 'not_ready']);
-
-            // // Remove the item from the cart after booking
-            // $cart->delete();
+            ]);;
 
             foreach ($rooms as $room) {
                 $booking->rooms()->attach($room->id); // Assuming 1 room at a time

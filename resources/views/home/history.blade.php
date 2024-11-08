@@ -61,9 +61,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>Our Rooms</h2>
+                        <h2>History</h2>
                         <div class="bt-option">
-                            <a href="{{ route('home') }}">Home</a>
+                            <a href="{{ route('home') }}">Beranda</a>
                             <span>History</span>
                         </div>
                     </div>

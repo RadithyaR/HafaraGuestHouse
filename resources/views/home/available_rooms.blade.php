@@ -60,8 +60,12 @@
                                                 <td>{{ $roomType->rooms_count }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="r-o">Facility:</td>
-                                                <td>{!!Str::limit($roomType->facility, 100)!!}</td>
+                                                <td class="r-o">Capacity (Adults):</td>
+                                                <td>{{$roomType->capacity}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="r-o">Capacity (Kids):</td>
+                                                <td>{{$roomType->capacity_kids}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

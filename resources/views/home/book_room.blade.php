@@ -17,9 +17,9 @@
           <div class="row">
               <div class="col-lg-12">
                   <div class="breadcrumb-text">
-                      <h2>Book Room</h2>
+                      <h2>Booking Ruangan</h2>
                       <div class="bt-option">
-                          <a href="{{route('home')}}">Home</a>
+                          <a href="{{route('home')}}">Beranda</a>
                           <span>Book Room</span>
                       </div>
                   </div>
@@ -49,8 +49,9 @@
                         </div>
                         <div class="bed_room">
                             <h3>{{ $roomType->name }}</h3>
-                            <p style="padding: 12px">{{ $roomType->description }}</p>
-                            <h5>Kapasitas : {{ $roomType->capacity }}</h5>
+                            <h4>Fasilitas : {!!Str::limit($roomType->facility, 100)!!}</h4>
+                            <h5>Kapasitas (Dewasa): {{ $roomType->capacity }}</h5>
+                            <h5>Kapasitas (Anak): {{ $roomType->capacity_kids }}</h5>
                             <h4>price : {{ $roomType->price }}</h4>
 
                         </div>

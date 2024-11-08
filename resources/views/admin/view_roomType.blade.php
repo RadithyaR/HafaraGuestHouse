@@ -40,7 +40,8 @@
                                             <th>No</th>
                                             <th>Room Name</th>
                                             <th>Price</th>
-                                            <th>Capacity</th>
+                                            <th>Capacity Adults</th>
+                                            <th>Capacity Kids</th>
                                             <th>Facility</th>
                                             <th>Image</th>
                                             <th>Action</th>
@@ -53,6 +54,7 @@
                                             <td>{{$types->name}}</td>
                                             <td>Rp{{$types->price}}</td>
                                             <td>{{$types->capacity}} orang</td>
+                                            <td>{{$types->capacity_kids}} orang</td>
                                             <td>{!!Str::limit($types->facility, 150, '...')!!}</td>
                                             <td>
                                                 <img width="70px" src="room/{{$types->image}}" alt="">

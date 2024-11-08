@@ -4,25 +4,23 @@
            <div class="col-lg-6">
                <div class="about-text">
                    <div class="section-title">
-                       <span>About Us</span>
-                       <h2>Intercontinental LA <br />Westlake Hotel</h2>
+                       <span>Tentang Kami</span>
+                       <h2>Hafara Guesthouse<br>Syariah</h2>
                    </div>
-                   <p class="f-para">Sona.com is a leading online accommodation site. We’re passionate about
-                       travel. Every day, we inspire and reach millions of travelers across 90 local websites in 41
-                       languages.</p>
-                   <p class="s-para">So when it comes to booking the perfect hotel, vacation rental, resort,
-                       apartment, guest house, or tree house, we’ve got you covered.</p>
-                   <a href="#" class="primary-btn about-btn">Read More</a>
+                   <p class="f-para">Hafara Guesthouse Syariah merupakan akomodasi yang nyaman dan bernuansa Islami di jantung Kota Padang.</p>
+                   <p class="s-para">Berlokasi strategis di kawasan Sawahan, kami menawarkan pengalaman menginap 
+                    yang tenang dan tenteram dengan standar layanan syariah.</p>
+                   <a href="{{route('about_us')}}" class="primary-btn about-btn">Selanjutnya</a>
                </div>
            </div>
            <div class="col-lg-6">
                <div class="about-pic">
                    <div class="row">
                        <div class="col-sm-6">
-                           <img src="img/about/about-1.jpg" alt="">
+                           <img src="img/about/halaman2-cut.jpg" alt="">
                        </div>
                        <div class="col-sm-6">
-                           <img src="img/about/about-2.jpg" alt="">
+                           <img src="img/about/halaman1-cut.jpg" alt="">
                        </div>
                    </div>
                </div>

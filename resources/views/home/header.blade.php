@@ -48,12 +48,12 @@
 
                 <nav class="mainmenu mobile-menu">
                     <ul>
-                        <li><a href="{{route('home')}}">Home</a></li>
-                        <li><a href="{{route('rooms')}}">Rooms</a></li>
-                        <li><a href="{{route('about_us')}}">About Us</a></li>
-                        <li><a href="{{route('contact_us')}}">Contact</a></li>
+                        <li><a href="{{route('home')}}">Beranda</a></li>
+                        <li><a href="{{route('rooms')}}">Ruangan</a></li>
+                        <li><a href="{{route('about_us')}}">Tentang Kami</a></li>
+                        <li><a href="{{route('contact_us')}}">Kontak</a></li>
                         <li><a href="{{route('history')}}">History</a></li>
-                      <li><a href="{{route('cart.index')}}">Cart</a></li>
+                      <li><a href="{{route('cart.index')}}">Keranjang</a></li>
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap">
@@ -61,7 +61,7 @@
                 </div>
                 <ul class="top-widget mt-4">
                     <li><i class="fa fa-phone"></i> (+62) 81384930391</li>
-                    <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+                    <li><i class="fa fa-instagram"></i> @@hafaraguesthousesyariah</li>
                 </ul>
             </div>
     </div>
@@ -78,7 +78,7 @@
                                 <i class="fa fa-phone"></i> (+62) 81384930391
                             </li>
                             <li class="list-inline-item mx-3">
-                                <i class="fa fa-envelope"></i> email@gmail.com
+                                <i class="fa fa-instagram"></i> @@hafaraguesthousesyariah
                             </li>
                         </ul>
                     </div>
@@ -141,12 +141,12 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-                                    <li><a href="{{route('home')}}">Home</a></li>
-                                    <li><a href="{{route('rooms')}}">Rooms</a></li>
-                                    <li><a href="{{route('about_us')}}">About Us</a></li>
-                                    <li><a href="{{route('contact_us')}}">Contact</a></li>
+                                    <li><a href="{{route('home')}}">Beranda</a></li>
+                                    <li><a href="{{route('rooms')}}">Ruangan</a></li>
+                                    <li><a href="{{route('about_us')}}">Tentang Kami</a></li>
+                                    <li><a href="{{route('contact_us')}}">Kontak</a></li>
                                     <li><a href="{{route('history')}}">History</a></li>
-                                    <li><a href="{{route('cart.index')}}">Cart</a></li>
+                                    <li><a href="{{route('cart.index')}}">Keranjang</a></li>
                                 </ul>
                             </nav>
                         </div>

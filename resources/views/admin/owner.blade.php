@@ -26,49 +26,6 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Owner Report</h1>
-                    </div>
-                    <section class="section mt-5">
-                        <div class="container">
-                            <h4>Total Income and Room Type Frequency</h4>
-                            <div class="row">
-                                <div class="col">
-                                    <!-- Area Chart -->
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            {{-- <div class="chart-area"> --}}
-                                            <canvas id="incomeChart"></canvas>
-                                            {{-- </div> --}}
-                                            <hr>
-                                            {{-- Styling for the area chart can be found in the
-                                            <code>/js/demo/chart-area-demo.js</code> file. --}}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <!-- Bar Chart -->
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            {{-- <div class="chart-bar"> --}}
-                                            <canvas id="roomTypeChart"></canvas>
-                                            {{-- </div> --}}
-                                            <hr>
-                                            {{-- Styling for the bar chart can be found in the
-            <code>/js/demo/chart-bar-demo.js</code> file. --}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </section>
                     <div class="page-header">
                         <div class="container-fluid">
                             <div class="d-flex justify-content-between align-items-center mb-3">

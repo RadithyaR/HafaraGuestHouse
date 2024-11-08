@@ -37,7 +37,9 @@ class AdminController extends Controller
         $totalBookings = Booking::count();
         $totalContacts = Contact::count();
 
-        return view('admin.index', compact('totalUsers', 'totalRooms', 'totalBookings', 'totalContacts'));
+        $bookings = Booking::with('user', 'bookingDetail.room.roomTypes', 'payment')->get();
+
+        return view('admin.index', compact('totalUsers', 'totalRooms', 'totalBookings', 'totalContacts','bookings'));
     }
 
     public function bookings()
@@ -66,6 +68,7 @@ class AdminController extends Controller
     public function owner()
     {
         $bookings = Booking::with('user', 'bookingDetail.room.roomTypes', 'payment')->get();
+
         return view('admin.owner', compact('bookings'));
     }
 

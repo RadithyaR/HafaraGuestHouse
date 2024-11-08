@@ -5,14 +5,13 @@
                 <div class="col-lg-4">
                     <div class="ft-about">
                         <div class="logo">
-                            <a href="#">
-                                <img src="img/footer-logo.png" alt="">
+                            <a href="{{route('home')}}">
+                                <img src="images/logo_hafara_white.svg" alt="" style="height: 70px; width: auto;">
                             </a>
                         </div>
-                        <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
+                        <p>Guesthouse berbasis Syariah yang menyediakan berbagai fasilitas dan harga yang terjangkau</p>
                         <div class="fa-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="https://www.instagram.com/hafaraguesthousesyariah"><i class="fa fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -20,22 +19,13 @@
                     <div class="ft-contact">
                         <h6>Contact Us</h6>
                         <ul>
-                            <li>(12) 345 67890</li>
-                            <li>info.colorlib@gmail.com</li>
-                            <li>856 Cordia Extension Apt. 356, Lake, United State</li>
+                            <li>(+62) 81384930391</li>
+                            <li>Jl. Sawahan No.48, RT.003/01, Sawahan, Kec. Padang Tim., Kota Padang, Sumatera
+                                Barat 25121</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 offset-lg-1">
-                    <div class="ft-newslatter">
-                        <h6>New latest</h6>
-                        <p>Get the latest updates and offers.</p>
-                        <form action="#" class="fn-form">
-                            <input type="text" placeholder="Email">
-                            <button type="submit"><i class="fa fa-send"></i></button>
-                        </form>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>

@@ -21,7 +21,7 @@
 
     <style>
         body {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/hafara.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/hafara2.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -37,7 +37,7 @@
         }
 
         .bg-login-image {
-            background-image: url('images/hafara.jpg');
+            background-image: url('images/hafara2.jpg');
             background-size: cover;
             background-position: center;
             border-top-left-radius: 15px;
