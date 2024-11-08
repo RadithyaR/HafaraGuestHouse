@@ -47,6 +47,7 @@
                 <div class="container">
                     <div class="row">
                         @foreach ($availableRoomTypes as $roomType)
+                        @if( $roomType->rooms_count  > 0)
                         <div class="col-lg-4 col-md-6">
                             <div class="room-item">
                                 <img src="room/{{ $roomType->image }}" alt="{{ $roomType->name }}" />
@@ -69,12 +70,13 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    @if( $roomType->rooms_count  != 0)
+                                    
                                     <a href="{{ route('book_room', ['id' => $roomType->id, 'checkin_date' => $checkin_date, 'checkout_date' => $checkout_date]) }}" class="primary-btn">More Details</a>
-                                    @endif
+                                    
                                 </div>
                             </div>
                         </div>
+                        @endif
                         @endforeach
                     </div>
                 </div>
