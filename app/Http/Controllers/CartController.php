@@ -23,7 +23,7 @@ class CartController extends Controller
         if ($request->additionalBed == '1') {
             $additionalBed = true;
         } else {
-            $additionalBed = true;
+            $additionalBed = false;
         }
         // Cek apakah ada kamar dengan status 'ready' sesuai dengan roomType_id yang di-request
         $cekroom = Room::where('status', 'ready')

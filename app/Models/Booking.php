@@ -28,6 +28,13 @@ class Booking extends Model
         'jumlah_kamar',
     ];
 
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class, 'booking_detail')
+            ->withPivot('jumlah_kamar')
+            ->withTimestamps();
+    }
+
     public function payment(): HasOne
     {
         return $this->hasOne(Payment::class);

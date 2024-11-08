@@ -69,7 +69,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    @if( $roomType->rooms_count  != 0)
                                     <a href="{{ route('book_room', ['id' => $roomType->id, 'checkin_date' => $checkin_date, 'checkout_date' => $checkout_date]) }}" class="primary-btn">More Details</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

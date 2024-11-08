@@ -168,53 +168,6 @@
                     }
                 }
             });
-
-            const dates = Object.keys(incomeByDate);
-            const totalIncomePerDate = Object.values(incomeByDate);
-            totalIncomePerDate.push(0);
-            const ctx1 = document.getElementById('incomeChart').getContext('2d');
-            const incomeChart = new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: dates,
-                    datasets: [{
-                        label: 'Total Income (IDR)',
-                        data: totalIncomePerDate,
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-            const ctx2 = document.getElementById('roomTypeChart').getContext('2d');
-            const roomTypeChart = new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                    labels: roomTypeLabels,
-                    datasets: [{
-                        label: 'Number of Bookings',
-                        data: roomTypeCounts,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
             
             var table = $('#table1').DataTable({
                 "paging": true,
