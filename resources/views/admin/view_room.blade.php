@@ -4,6 +4,7 @@
 <head>
     @include('admin.css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
 </head>
 
 <body id="page-top">
@@ -30,6 +31,12 @@
                         <h1 class="h3 mb-0 text-gray-800">View Room</h1>
                         <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal">+ Add Room</button>
                     </div>
+                    @if(Session::has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ Session::get('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     @include('modal.addRoom')
                     <section class="section">
                         <div class="card">
@@ -97,6 +104,17 @@
                 }
             });
         });
+
+        @if(Session::has('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ Session::get("success") }}',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        @endif
     </script>
 </body>
 

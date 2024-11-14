@@ -34,7 +34,7 @@ class RoomController extends Controller
         $data->capacity_kids = $request->capacity_kids;
         $data->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Room Type added successfully');
 
     }
     public function edit_roomType(Request $request, $id)
@@ -78,7 +78,7 @@ class RoomController extends Controller
 
         $data->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Room added successfully');
 
     }
 
