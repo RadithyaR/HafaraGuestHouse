@@ -3,6 +3,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.svg') }}">
     <title>Hafara Guesthouse Syariah</title>
 
     <!-- Google Font -->
@@ -46,13 +47,13 @@
     /* Menyesuaikan kegelapan berdasarkan ukuran layar */
     @media (max-width: 768px) {
         .hs-item::after {
-            background: rgba(0, 0, 0, 0.6); /* Lebih gelap di mobile */
+            background: rgba(0, 0, 0, 0.6); 
         }
     }
     
     @media (max-width: 480px) {
         .hs-item::after {
-            background: rgba(0, 0, 0, 0.7); /* Paling gelap di smartphone */
+            background: rgba(0, 0, 0, 0.7); 
         }
     }
     </style>
