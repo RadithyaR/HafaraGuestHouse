@@ -83,7 +83,7 @@ class AdminController extends Controller
             $filename = time() . '_' . $file->getClientOriginalName();
 
             $path = $file->storeAs('blob', $filename, 'public');
-
+            
             $users->blob_path = Storage::url($path);
             $users->save();
         }
@@ -104,6 +104,11 @@ class AdminController extends Controller
 
     public function print_invoice($id)
     {
+        $isAdmin = Auth::user()->role === 'admin';
+        $isAllowed = Booking::where('id', $id)->where('user_id', Auth::id())->exists();
+        if (!$isAdmin && !$isAllowed) {
+            abort(403);
+        }
         $invoice = Booking::with('user', 'bookingDetail.room.roomTypes', 'payment')
             ->where('id', $id)
             ->first();

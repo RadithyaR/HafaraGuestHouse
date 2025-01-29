@@ -38,8 +38,8 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
     Route::post('/update_user', [AdminController::class, 'update_user'])->name('update_user');
     Route::get('/report', [AdminController::class, 'report'])->name('report');
-    Route::get('/report/print_invoice/{id}', [AdminController::class, 'print_invoice'])->name('report.print_invoice');
 });
+Route::get('/report/print_invoice/{id}', [AdminController::class, 'print_invoice'])->name('report.print_invoice');
 
 Route::middleware(['auth','role:owner'])->group(function(){
     Route::get('/owner', [AdminController::class, 'owner']);

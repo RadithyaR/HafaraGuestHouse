@@ -76,11 +76,6 @@ class BookingController extends Controller
         $amountOfPrice = 0;
         $booking_ids = [];
         $payments = [];
-        // // Get the first cart item for the user (assuming only one cart item for one room type)
-        // $cart = Cart::where('user_id', $user)->first();
-        // if (!$cart) {
-        //     return redirect()->back()->with('error', 'Cart is empty!');
-        // }
 
         // Get all cart items for the user
         $cartItems = Cart::where('user_id', $user)->get();
@@ -129,6 +124,7 @@ class BookingController extends Controller
                 'status' => 'booked',
                 'total_price' => $totalPrice,
                 'jumlah_kamar' => $cart->jumlah_kamar,
+                'booking_time' => now(),
             ]);
 
             $payment = Payment::create([
@@ -168,7 +164,6 @@ class BookingController extends Controller
         }
 
         // Show success message and redirect to cart page
-        // return redirect()->route('cart.index')->with('success', 'Room successfully booked!');
         return redirect()->away($generateInvoice['invoice_url']);
     }
 
@@ -202,9 +197,7 @@ class BookingController extends Controller
         $booking->fine_price = $fine_price;
         $booking->status = 'checked_out';
         $booking->save();
-        $bookingDetails = BookingDetail::where('booking_id', $booking->id)->get();
-        // $rooms = Room::find($bookingDetails->room_id);
-        // $rooms->status = 'ready';  
+        $bookingDetails = BookingDetail::where('booking_id', $booking->id)->get(); 
 
         // Loop through each booking detail and update the room status to 'ready'
         foreach ($bookingDetails as $bookingDetail) {

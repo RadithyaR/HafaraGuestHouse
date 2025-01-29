@@ -91,6 +91,7 @@
                                         <th>Status</th>
                                         <th>Payment Status</th>
                                         <th>Harga</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -104,6 +105,14 @@
                                             <td>{{ $booking->status }}</td>
                                             <td>{{ $booking->pstatus }}</td>
                                             <td>{{ $booking->total_price }}</td>
+                                            <td>
+                                                @if ($booking->status == 'checked_out' || $booking->status == 'checked_in')
+                                                    <a href="{{ route('report.print_invoice', $booking->id) }}"
+                                                        class="btn btn-primary"><i class="bi bi-receipt"></i></a>
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

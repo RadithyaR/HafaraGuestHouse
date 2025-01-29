@@ -26,6 +26,7 @@ class Booking extends Model
         'remarks',
         'fine_price',
         'jumlah_kamar',
+        'booking_time'
     ];
 
     public function rooms()
