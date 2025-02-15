@@ -36,14 +36,15 @@
             <h4 style="text-align: center; margin-bottom: 30px;">Find your perfect stay from {{ $checkin_date }}
                 to {{ $checkout_date }}</h4>
 
-            <form action="{{route('check-availability')}}" method="post" class="book_now" style="text-align: center; margin-bottom: 20px;">
-                @csrf
-                <label for="checkin_date" class="me-2">Check-In Date:</label>
-                <input type="date" name="checkin_date" value="{{ $checkin_date }}" required class="me-2">
-                <label for="checkout_date" class="me-2">Check-Out Date:</label>
-                <input type="date" name="checkout_date" value="{{ $checkout_date }}" required class="me-2">
-                <button type="submit" class="button">Check Availability</button>
-            </form>       
+                <form action="{{ route('check-availability') }}" method="post" style="text-align: center; margin-bottom: 20px;" onsubmit="return validateDates()">
+                    @csrf
+                    <label for="checkin_date" class="me-2">Check-In Date:</label>
+                    <input type="date" name="checkin_date" value="{{ $checkin_date }}" id="date-in" min="{{ date('Y-m-d', strtotime('+1 day')) }}" required class="me-2">
+                    <label for="checkout_date" class="me-2">Check-Out Date:</label>
+                    <input type="date" name="checkout_date" value="{{ $checkout_date }}" id="date-out" min="{{ date('Y-m-d', strtotime('+1 day')) }}" required class="me-2">
+                    <button type="submit" class="button">Check Availability</button>
+                    <p id="date-error" style="color: red; display: none; margin-top: 10px;">Tanggal Check Out tidak boleh lebih awal dari tanggal Check In.</p>
+                </form>       
             <section class="rooms-section spad">
                 <div class="container">
                     <div class="row">
@@ -96,6 +97,22 @@
                 $(window).scrollTop(sessionStorage.scrollTop);
             }
         });
+
+        function validateDates() {
+        const checkInDate = document.getElementById('date-in').value;
+        const checkOutDate = document.getElementById('date-out').value;
+        const checkIn = new Date(checkInDate);
+        const checkOut = new Date(checkOutDate);
+
+        if (checkOut < checkIn) {
+            document.getElementById('date-error').style.display = 'block';
+            return false; // Mencegah pengiriman form
+        } else {
+            document.getElementById('date-error').style.display = 'none';
+            return true; // Lanjutkan pengiriman form
+        }
+    }
+
     </script>
 
 

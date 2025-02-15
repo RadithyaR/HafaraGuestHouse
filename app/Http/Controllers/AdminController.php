@@ -33,8 +33,8 @@ class AdminController extends Controller
     public function dashboard()
     {
         $totalUsers = Booking::where('status', 'checked_in')->distinct('user_id')->count('user_id');
-        $totalRooms = Room::count();
-        $totalBookings = Booking::count();
+        $totalRooms = Room::where('status', 'ready')->count();
+        $totalBookings = Booking::where('status', 'booked')->count();
         $totalContacts = Contact::count();
 
         $bookings = Booking::with('user', 'bookingDetail.room.roomTypes', 'payment')->get();

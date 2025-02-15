@@ -112,6 +112,9 @@
         </div>
     </section>
 
+    <div class="alert alert-warning mt-3">
+        <strong>Kebijakan Pembatalan:</strong> Untuk pembatalan booking, uang hanya dikembalikan sebesar 50%.
+    </div>
                     <div class="row justify-content-end mb-3">
                         <div class="col-auto">
                             <form action="{{ route('booking.bookRoom') }}" method="POST">

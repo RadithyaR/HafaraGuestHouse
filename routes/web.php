@@ -49,13 +49,12 @@ Route::middleware(['auth','role:owner'])->group(function(){
 Route::middleware(['auth'])->group(function(){
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::get('/history', [HomeController::class, 'history'])->name('history');
+    Route::post('/contact', [HomeController::class, 'contact'])->name('contact');
+    Route::get('/book_room/{id}/{checkin_date}/{checkout_date}', [BookingController::class, 'book'])->name('book_room');
+Route::post('/book-room', [BookingController::class, 'bookRoom'])->name('booking.bookRoom');
 });
 
 Route::post('/check-availability', [BookingController::class, 'checkAvailableRooms'])->name('check-availability');
-Route::get('/book_room/{id}/{checkin_date}/{checkout_date}', [BookingController::class, 'book'])
-    ->middleware('auth')
-    ->name('book_room');
-Route::post('/book-room', [BookingController::class, 'bookRoom'])->name('booking.bookRoom');
 
 Route::post('/add_to_cart', [CartController::class, 'addToCart'])->name('add_to_cart');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
@@ -65,7 +64,7 @@ Route::get('/room_details/{id}', [HomeController::class, 'room_details'])->name(
 Route::post('/add_booking/{id}', [HomeController::class, 'add_booking']);
 
 Route::get('/contact_us', [HomeController::class, 'contact_us'])->name('contact_us');
-Route::post('/contact', [HomeController::class, 'contact'])->name('contact');
+
 
 Route::get('/about', [HomeController::class, 'about'])->name('about_us');
 
