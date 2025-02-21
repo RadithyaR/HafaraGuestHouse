@@ -65,13 +65,11 @@ Route::post('/add_booking/{id}', [HomeController::class, 'add_booking']);
 
 Route::get('/contact_us', [HomeController::class, 'contact_us'])->name('contact_us');
 
-
 Route::get('/about', [HomeController::class, 'about'])->name('about_us');
 
 Route::get('/payment', [PaymentController::class, 'index']);
 Route::post('create-invoice', [PaymentController::class, 'createInvoice'])->name('create-invoice');
 
-// Payment success and failure
 // route('payment.success', ['id' => $payment->id]),
 Route::get('/payment_success/{id}', [PaymentController::class, 'success'])->name('payment.success');
 Route::get('/payment_failure/{id}', [PaymentController::class, 'failure'])->name('payment.failure');

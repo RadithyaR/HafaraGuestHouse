@@ -7,9 +7,7 @@ use App\Models\Cart;
 use Carbon\Carbon;
 use App\Models\Contact;
 use Illuminate\Http\Request;
-
 use App\Models\Room;
-
 use App\Models\Booking;
 use App\Models\RoomType;
 use Illuminate\Support\Facades\Auth;
@@ -74,10 +72,15 @@ class HomeController extends Controller
                 'bookings.jumlah_kamar',
                 'bookings.status',
                 'payment.status as pstatus',
+                'payment.id as payment_id',
+                'payment.checkout_link as checkout_link',
+                'payment.external_id',    
                 'bookings.total_price'
             )
             ->where('bookings.user_id', Auth::id())
-            ->groupBy('bookings.id', 'users.name', 'room_types.name', 'rooms.status', 'bookings.checkin_date', 'bookings.checkout_date', 'bookings.jumlah_kamar', 'bookings.status', 'payment.status', 'bookings.total_price')
+            ->groupBy('bookings.id', 'users.name', 'room_types.name', 'rooms.status', 'bookings.checkin_date', 
+                    'bookings.checkout_date', 'bookings.jumlah_kamar', 'bookings.status', 
+                    'payment.status', 'payment.id','payment.checkout_link' , 'payment.external_id', 'bookings.total_price')
             ->get();
 
         return view('home.history', compact('bookings'));

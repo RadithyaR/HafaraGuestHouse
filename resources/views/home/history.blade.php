@@ -106,7 +106,11 @@
                                             <td>{{ $booking->pstatus }}</td>
                                             <td>{{ $booking->total_price }}</td>
                                             <td>
-                                                @if ($booking->status == 'checked_out' || $booking->status == 'checked_in')
+                                                @if ($booking->pstatus == 'pending')
+                                                    <a href="{{$booking->checkout_link}}" class="btn btn-warning btn-sm">
+                                                        <i class="bi bi-credit-card"></i> Pay
+                                                    </a>
+                                                @elseif ($booking->status == 'checked_out' || $booking->status == 'checked_in')
                                                     <a href="{{ route('report.print_invoice', $booking->id) }}"
                                                         class="btn btn-primary"><i class="bi bi-receipt"></i></a>
                                                 @else

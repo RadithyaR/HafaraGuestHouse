@@ -28,7 +28,7 @@ class Payment extends Model
         return $this->belongsTo(Booking::class);
     }
 
-    // Cek apakah pembayaran sudah kadaluarsa
+    // Cek pembayaran kadaluarsa
     public function isExpired()
     {
         return Carbon::now()->greaterThan($this->expired_at);
@@ -39,4 +39,6 @@ class Payment extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    
 }

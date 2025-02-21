@@ -17,6 +17,7 @@ use Illuminate\Support\Str;
 
 class PaymentController extends Controller
 {
+
     public function success($id)
     {
         $payment = Payment::where('external_id', $id)->first();
