@@ -71,24 +71,28 @@
                             @endphp
                             @foreach ($cartItems as $item)
                                 @php
-                                    $stayDuration = \Carbon\Carbon::parse($item->checkin_date)->diffInDays(
-                                        \Carbon\Carbon::parse($item->checkout_date),
-                                    );
-
-                                    $subtotal = $item->roomType->price * $item->jumlah_kamar * $stayDuration;
-
-                                    if ($item->is_additional_bed) {
-                                        $subtotal += 50000;
+                                    $detail = $item->bookingDetail->first(); // Ambil bookingDetail pertama
+                                    if ($detail && $detail->room && $detail->room->roomTypes) {
+                                        $roomType = $detail->room->roomTypes;
+                                        $stayDuration = \Carbon\Carbon::parse($item->checkin_date)->diffInDays(
+                                            \Carbon\Carbon::parse($item->checkout_date),
+                                        );
+    
+                                        $subtotal = $roomType->price * $item->jumlah_kamar * $stayDuration;
+    
+                                        if ($item->is_additional_bed) {
+                                            $subtotal += 50000;
+                                        }
+    
+                                        $total += $subtotal;
                                     }
-
-                                    $total += $subtotal;
                                 @endphp
                                 <tr>
-                                    <td>{{ $item->roomType->name }}</td>
+                                    <td>{{ $roomType->name }}</td>
                                     <td>{{ $item->checkin_date }}</td>
                                     <td>{{ $item->checkout_date }}</td>
                                     <td>{{ $item->jumlah_kamar }}</td>
-                                    <td>Rp{{ number_format($item->roomType->price, 0, ',', '.') }}</td>
+                                    <td>Rp{{ number_format($roomType->price, 0, ',', '.') }}</td>
                                     <td>{{ $item->is_additional_bed ? 'Yes' : 'No' }}</td>
                                     <td>Rp{{ number_format($subtotal, 0, ',', '.') }}</td>
                                     <td>
@@ -115,14 +119,16 @@
     <div class="alert alert-warning mt-3">
         <strong>Kebijakan Pembatalan:</strong> Untuk pembatalan booking, uang hanya dikembalikan sebesar 50%.
     </div>
+                    @if (!$cartItems->isEmpty())
                     <div class="row justify-content-end mb-3">
                         <div class="col-auto">
                             <form action="{{ route('booking.bookRoom') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-success">Check Out</button>
+                                <button type="submit" class="btn btn-success">Pay Now</button>
                             </form>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

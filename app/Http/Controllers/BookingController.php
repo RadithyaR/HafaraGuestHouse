@@ -8,7 +8,6 @@ use Xendit\Invoice\CreateInvoiceRequest;
 use Xendit\Invoice\InvoiceApi;
 use App\Models\Booking;
 use App\Models\BookingDetail;
-use App\Models\Cart;
 use App\Models\Payment;
 use App\Models\Room;
 use App\Models\RoomType;
@@ -100,7 +99,7 @@ class BookingController extends Controller
         $payments = [];
 
         // Get all cart items for the user
-        $cartItems = Cart::where('user_id', $user)->get();
+        $cartItems = Booking::where('user_id', $user)->get();
         if ($cartItems->isEmpty()) {
             return redirect()->back()->with('error', 'Cart is empty!');
         }

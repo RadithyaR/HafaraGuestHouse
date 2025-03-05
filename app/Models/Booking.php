@@ -26,14 +26,15 @@ class Booking extends Model
         'remarks',
         'fine_price',
         'jumlah_kamar',
-        'booking_time'
+        'booking_time',
+        'is_additional_bed'
     ];
 
     public function rooms()
     {
-        return $this->belongsToMany(Room::class, 'booking_detail')
-            ->withPivot('jumlah_kamar')
-            ->withTimestamps();
+        return $this->belongsToMany(Room::class, 'booking_detail');
+    //         ->withPivot('jumlah_kamar')
+    //         ->withTimestamps();
     }
 
     public function payment(): HasOne
@@ -50,4 +51,5 @@ class Booking extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
 }

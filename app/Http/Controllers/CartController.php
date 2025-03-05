@@ -14,12 +14,16 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cartItems = Cart::where('user_id', Auth::id())->get();
-        return view('cart.index', compact('cartItems'));
+        $cartItems = Booking::with(['bookingDetail.room.roomTypes'])
+                            ->where('user_id', Auth::id())
+                            ->where('status', 'pending')
+                            ->get();
+    return view('cart.index', compact('cartItems'));
     }
 
     public function addToCart(Request $request)
     {
+
         if ($request->additionalBed == '1') {
             $additionalBed = true;
         } else {
@@ -28,6 +32,7 @@ class CartController extends Controller
         // Cek apakah ada kamar dengan status 'ready' sesuai dengan roomType_id yang di-request
         $cekroom = Room::where('status', 'ready')
             ->where('roomType_id', $request->roomType_id)
+            ->take($request->jumlah_kamar) // Ambil jumlah kamar sesuai permintaan
             ->get();
 
         // Jika tidak ada kamar yang tersedia, redirect kembali dengan pesan error
@@ -45,16 +50,27 @@ class CartController extends Controller
 
         // Mendapatkan user yang sedang login
         $user = Auth::user();
-
+        
         // Menambahkan data ke cart
-        Cart::create([
+        $booking = Booking::create([
             'user_id' => $user->id,
-            'roomType_id' => $request->roomType_id,
             'checkin_date' => $request->checkin_date,
             'checkout_date' => $request->checkout_date,
             'jumlah_kamar' => $request->jumlah_kamar,
+            'status' => 'pending',
+            'booking_time' => now(),
+            'is_cart' => true,
             'is_additional_bed' => $additionalBed
         ]);
+        // Menambahkan data ke tabel booking_detail untuk setiap kamar yang dipesan
+        foreach ($cekroom as $room) {
+        BookingDetail::create([
+            'booking_id' => $booking->id, // ID booking yang baru dibuat
+            'room_id' => $room->id, // ID kamar yang tersedia
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
 
         // Redirect ke halaman cart dengan pesan sukses
         return redirect()->route('cart.index')->with('success', 'Room added to cart');
@@ -62,13 +78,9 @@ class CartController extends Controller
 
     public function destroy($id)
     {
-        // Find the cart item by ID
-        $cartItem = Cart::findOrFail($id);
+        $booking = Booking::findOrFail($id);
+        $booking->delete();
 
-        // Delete the cart item
-        $cartItem->delete();
-
-        // Redirect back with a success message
-        return redirect()->back()->with('message', 'Item removed from cart successfully!');
+        return redirect()->route('cart.index')->with('success', 'Item removed from cart');
     }
 }

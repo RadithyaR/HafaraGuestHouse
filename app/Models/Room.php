@@ -25,9 +25,9 @@ class Room extends Model
 
     public function bookings()
     {
-        return $this->belongsToMany(Booking::class, 'booking_detail')
-        ->withPivot('jumlah_kamar')
-        ->withTimestamps();
+        return $this->belongsToMany(Booking::class, 'booking_detail');
+    //     ->withPivot('jumlah_kamar')
+    //     ->withTimestamps();
     }
 
 }
