@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\BookingController;
@@ -64,6 +65,7 @@ Route::get('/room_details/{id}', [HomeController::class, 'room_details'])->name(
 Route::post('/add_booking/{id}', [HomeController::class, 'add_booking']);
 
 Route::get('/contact_us', [HomeController::class, 'contact_us'])->name('contact_us');
+Route::post('/feedback/{id}', [FeedbackController::class, 'submit'])->name('feedback.submit');
 
 Route::get('/about', [HomeController::class, 'about'])->name('about_us');
 

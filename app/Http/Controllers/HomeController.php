@@ -71,6 +71,8 @@ class HomeController extends Controller
                 'bookings.checkout_date',
                 'bookings.jumlah_kamar',
                 'bookings.status',
+                'bookings.rating',
+                "bookings.feedback_message",
                 'payment.status as pstatus',
                 'payment.id as payment_id',
                 'payment.checkout_link as checkout_link',
@@ -79,8 +81,8 @@ class HomeController extends Controller
             )
             ->where('bookings.user_id', Auth::id())
             ->groupBy('bookings.id', 'users.name', 'room_types.name', 'rooms.status', 'bookings.checkin_date', 
-                    'bookings.checkout_date', 'bookings.jumlah_kamar', 'bookings.status', 
-                    'payment.status', 'payment.id','payment.checkout_link' , 'payment.external_id', 'bookings.total_price')
+                    'bookings.checkout_date', 'bookings.jumlah_kamar', 'bookings.status', 'bookings.rating',
+                "bookings.feedback_message",  'payment.status', 'payment.id','payment.checkout_link' , 'payment.external_id', 'bookings.total_price')
             ->get();
 
         return view('home.history', compact('bookings'));

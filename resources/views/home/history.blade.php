@@ -6,6 +6,8 @@
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.5.0/css/rowGroup.bootstrap.css">
+    <!-- Bootstrap Star Rating CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.1.2/css/star-rating.min.css" rel="stylesheet">
     <style>
         /* Memperbesar dropdown untuk jumlah entri */
         .dataTables_length label {
@@ -108,11 +110,15 @@
                                             <td>
                                                 @if ($booking->pstatus == 'pending')
                                                     <a href="{{$booking->checkout_link}}" class="btn btn-warning btn-sm">
-                                                        <i class="bi bi-credit-card"></i> Pay
+                                                        <i class="bi bi-credit-card"></i> Pay Now
                                                     </a>
                                                 @elseif ($booking->status == 'checked_out' || $booking->status == 'checked_in')
-                                                    <a href="{{ route('report.print_invoice', $booking->id) }}"
-                                                        class="btn btn-primary"><i class="bi bi-receipt"></i></a>
+                                                <a href="{{ route('report.print_invoice', $booking->id) }}"
+                                                    class="btn btn-primary"><i class="bi bi-receipt"></i></a>
+                                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#feedbackModal{{ $booking->id }}">
+                                                    <i class="bi bi-star"></i> Feedback
+                                                </button>
+                                                @include('modal.feedback')
                                                 @else
                                                     -
                                                 @endif
@@ -132,6 +138,8 @@
     <!-- end contact -->
     <!--  footer -->
     @include('home.footer')
+    <!-- Bootstrap Star Rating JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.1.2/js/star-rating.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <!-- DataTables JS -->
@@ -161,6 +169,24 @@
                         next: "Next"
                     }
                 }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Inisialisasi star rating untuk setiap modal saat modal dibuka
+            $('.modal').on('shown.bs.modal', function() {
+                $('.rating').rating({
+                    showCaption: false,
+                    showClear: false,
+                    starCaptions: {
+                        1: 'Poor',
+                        2: 'Fair',
+                        3: 'Good',
+                        4: 'Very Good',
+                        5: 'Excellent'
+                    }
+                });
             });
         });
     </script>
