@@ -183,6 +183,7 @@
             const roomTypeLabels = Object.keys(roomTypes);
             const roomTypeCounts = Object.values(roomTypes);
             roomTypeCounts.push(0);
+
             const incomeByDate = {};
 
             function formatDate(dateString) {
@@ -197,7 +198,7 @@
 
             bookings.forEach(b => {
                 if (b.payment.status === 'paid') {
-                    const formattedDate = formatDate(b.checkin_date);
+                    const formattedDate = formatDate(b.checkout_date);
                     let total_price = parseFloat(b.total_price);
                     if (b.fine_price !== null) {
                         total_price += parseFloat(b.fine_price);
@@ -210,14 +211,24 @@
                 }
             });
 
-            const dates = Object.keys(incomeByDate);
-            const totalIncomePerDate = Object.values(incomeByDate);
+            // Ambil tanggal dari incomeByDate dan urutkan secara ascending
+            const dates = Object.keys(incomeByDate).sort((a, b) => {
+                // Konversi tanggal ke objek Date untuk perbandingan
+                const dateA = new Date(a);
+                const dateB = new Date(b);
+                return dateA - dateB; // Urutkan dari yang paling awal ke yang paling baru
+            });
+
+            // Ambil total pendapatan sesuai dengan tanggal yang sudah diurutkan
+            const totalIncomePerDate = dates.map(date => incomeByDate[date]);
             totalIncomePerDate.push(0);
+
+            // Buat grafik
             const ctx1 = document.getElementById('incomeChart').getContext('2d');
             const incomeChart = new Chart(ctx1, {
                 type: 'bar',
                 data: {
-                    labels: dates,
+                    labels: dates, // Gunakan tanggal yang sudah diurutkan
                     datasets: [{
                         label: 'Total Income (IDR)',
                         data: totalIncomePerDate,

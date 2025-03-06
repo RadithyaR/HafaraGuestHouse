@@ -151,17 +151,6 @@ class BookingController extends Controller
                 return redirect()->back()->with('error', 'Not enough rooms available for ' . $roomType->name);
             }
 
-            // // Create a new booking
-            // $booking = Booking::create([
-            //     'user_id' => $user,
-            //     'checkin_date' => $checkinDate,
-            //     'checkout_date' => $checkoutDate,
-            //     'status' => 'booked',
-            //     'total_price' => $totalPrice,
-            //     'jumlah_kamar' => $cart->jumlah_kamar,
-            //     'booking_time' => now(),
-            // ]);
-
             $external_id = 'pym-' . $cart->id;
             
             $payment = Payment::create([
@@ -173,9 +162,9 @@ class BookingController extends Controller
                 'expired_at' => now()->addHour(1),
             ]);;
 
-            foreach ($rooms as $room) {
-                $cart->rooms()->attach($room->id); // Assuming 1 room at a time
-            }
+            // foreach ($rooms as $room) {
+            //     $cart->rooms()->attach($room->id); // Assuming 1 room at a time
+            // }
             $amountOfPrice += $totalPrice;
             $booking_ids[] = $cart->id;
             $payments[] = $payment;
