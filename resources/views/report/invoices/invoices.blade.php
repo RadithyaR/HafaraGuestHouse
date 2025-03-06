@@ -129,13 +129,30 @@
             {{ $total += $room->room->roomTypes->price * $dateLength }}
         @endforeach
         <tr>
-            <td>Penalty</td>
-            <td colspan="2">Rp{{ number_format($invoice->fine_price) }}</td>
+            <td>Extra Bed</td>
+            <td>
+                @if ($invoice->is_additional_bed == 1)
+                    yes
+                @else
+                    no
+                @endif
+            </td>
+            <td>
+                @if ($invoice->is_additional_bed == 1)
+                    Rp50,000
+                @else
+                    Rp0
+                @endif
+            </td>
         </tr>
         <tr>
+            <td colspan="2">Penalty</td>
+            <td >Rp{{ number_format($invoice->fine_price) }}</td>
+        </tr>
+        <!-- <tr>
             <td>Additional Cost</td>
             <td colspan="2">Rp{{ number_format($invoice->total_price + $invoice->fine_price - $total) }}</td>
-        </tr>
+        </tr> -->
         <tr>
             <td colspan="2" style="text-align: center;">Total</td>
             <td>Rp{{ number_format($invoice->total_price + $invoice->fine_price) }}</td>

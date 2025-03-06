@@ -91,6 +91,7 @@
                                                 <th>Date</th>
                                                 <th>Status</th>
                                                 <th>Payment Status</th>
+                                                <th>Feedback</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -111,6 +112,9 @@
                                                     </td>
                                                     <td>{{ $booking->status }}</td>
                                                     <td>{{ $booking->payment->status }}</td>
+                                                    <td>
+
+                                                    </td>
                                                     <td>
                                                         <a href="{{ route('report.print_invoice', $booking->id) }}"
                                                             class="btn btn-primary"><i class="bi bi-receipt"></i></a>
