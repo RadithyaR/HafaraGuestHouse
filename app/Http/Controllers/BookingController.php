@@ -93,13 +93,16 @@ class BookingController extends Controller
         $email = Auth::user()->email;
         //$external_id = $this->generateCustomExternalId();
         // $external_id = (string) Str::uuid();
-        
         $amountOfPrice = 0;
         $booking_ids = [];
         $payments = [];
 
         // Get all cart items for the user
-        $cartItems = Booking::where('user_id', $user)->get();
+        $cartItems = Booking::with(['bookingDetail.room.roomTypes'])
+                            ->where('user_id', $user)
+                            ->where('status', 'pending')
+                            ->get();
+
         if ($cartItems->isEmpty()) {
             return redirect()->back()->with('error', 'Cart is empty!');
         }
@@ -112,22 +115,33 @@ class BookingController extends Controller
             // Calculate the total stay duration
             $stayDuration = (int) \Carbon\Carbon::parse($checkinDate)->diffInDays(\Carbon\Carbon::parse($checkoutDate));
 
-            // Find the room type and its price
-            $roomType = RoomType::find($cart->roomType_id);
+            // Get the first booking detail to find the room and room type
+            $bookingDetail = $cart->bookingDetail->first();
+            if (!$bookingDetail) {
+                return redirect()->back()->with('error', 'Booking detail not found!');
+            }
+
+            // Get the room and room type
+            $room = $bookingDetail->room;
+            if (!$room) {
+                return redirect()->back()->with('error', 'Room not found!');
+            }
+            
+            $roomType = $bookingDetail->room->roomTypes;
             if (!$roomType) {
                 return redirect()->back()->with('error', 'Room type not found!');
             }
-
+            
             // Get the total price for the booking (room price * jumlah kamar * stay duration)
             $roomPrice = $roomType->price;
             $totalPrice = $roomPrice * $cart->jumlah_kamar * $stayDuration;
-
+            
             if ($cart->is_additional_bed) {
                 $totalPrice += 50000;
             }
 
             // Get the rooms that are available for the current room type
-            $rooms = Room::where('roomType_id', $cart->roomType_id)
+            $rooms = Room::where('roomType_id', $roomType->id)
                 ->where('status', 'ready')
                 ->take($cart->jumlah_kamar)
                 ->get();
@@ -137,21 +151,21 @@ class BookingController extends Controller
                 return redirect()->back()->with('error', 'Not enough rooms available for ' . $roomType->name);
             }
 
-            // Create a new booking
-            $booking = Booking::create([
-                'user_id' => $user,
-                'checkin_date' => $checkinDate,
-                'checkout_date' => $checkoutDate,
-                'status' => 'booked',
-                'total_price' => $totalPrice,
-                'jumlah_kamar' => $cart->jumlah_kamar,
-                'booking_time' => now(),
-            ]);
+            // // Create a new booking
+            // $booking = Booking::create([
+            //     'user_id' => $user,
+            //     'checkin_date' => $checkinDate,
+            //     'checkout_date' => $checkoutDate,
+            //     'status' => 'booked',
+            //     'total_price' => $totalPrice,
+            //     'jumlah_kamar' => $cart->jumlah_kamar,
+            //     'booking_time' => now(),
+            // ]);
 
-            $external_id = 'pym-' . $booking->id;
+            $external_id = 'pym-' . $cart->id;
             
             $payment = Payment::create([
-                'booking_id' => $booking->id,
+                'booking_id' => $cart->id,
                 'user_id' => $user,
                 'checkout_link' => 'https://example.com/checkout',
                 'external_id' => $external_id,
@@ -160,13 +174,19 @@ class BookingController extends Controller
             ]);;
 
             foreach ($rooms as $room) {
-                $booking->rooms()->attach($room->id); // Assuming 1 room at a time
+                $cart->rooms()->attach($room->id); // Assuming 1 room at a time
             }
             $amountOfPrice += $totalPrice;
-            $booking_ids[] = $booking->id;
+            $booking_ids[] = $cart->id;
             $payments[] = $payment;
-            // Remove the item from the cart after processing
-            $cart->delete();
+
+            // Update booking 
+            $cart->update([
+                'is_cart'=>false,
+                'status'=>'booked',
+                'total_price' => $totalPrice,
+                'booking_time' => now()
+            ]);
         }
 
         $createInvoice = new CreateInvoiceRequest([
