@@ -73,7 +73,7 @@
                                             <th>Fine Price</th>
                                             <th>Date</th>
                                             <th>Status</th>
-                                            <th>Payment Status</th>
+                                            <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -88,13 +88,13 @@
                                                 <td>{{ $booking->user->name }}</td>
                                                 <td>{{ $booking->checkin_date }}</td>
                                                 <td>{{ $booking->checkout_date }}</td>
-                                                <td>{{ $booking->total_price }}</td>
+                                                <td>Rp{{ $booking->total_price }}</td>
                                                 <td>{{ $booking->remarks ?? '-' }}</td>
-                                                <td>{{ $booking->fine_price ?? '-' }}</td>
+                                                <td>Rp{{ $booking->fine_price ?? '-' }}</td>
                                                 <td>{{ Carbon\Carbon::parse($booking->created_at)->format('d F Y') }}
                                                 </td>
                                                 <td>{{ $booking->status }}</td>
-                                                <td>{{ $booking->payment->status }}</td>
+                                                <td>Rp{{ $booking->total_price + $booking->fine_price }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

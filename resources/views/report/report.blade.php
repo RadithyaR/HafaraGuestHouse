@@ -113,7 +113,10 @@
                                                     <td>{{ $booking->status }}</td>
                                                     <td>{{ $booking->payment->status }}</td>
                                                     <td>
-
+                                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#feedbackModal{{ $booking->id }}">
+                                                            <i class="bi bi-star"></i> 
+                                                        </button>
+                                                        @include('modal.tampilfeedback')
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('report.print_invoice', $booking->id) }}"
