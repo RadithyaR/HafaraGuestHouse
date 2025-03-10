@@ -114,27 +114,46 @@
 
     <table class="room-table">
         <tr>
-            <th>Room/Type</th>
-            <th>Price</th>
+            <th>Room Type</th>
+            <th>Number of Rooms</th>
+            <th>Price per Night</th>
             <th>Sub Total</th>
         </tr>
         {{ $dateLength = abs(\Carbon\Carbon::parse($invoice->checkout_date)->diffInDays(\Carbon\Carbon::parse($invoice->checkin_date))) }}
         {{ $total = 0 }}
-        @foreach ($invoice->bookingDetail as $room)
+    
+        @php
+            // Kelompokkan kamar berdasarkan tipe kamar
+            $groupedRooms = [];
+            foreach ($invoice->bookingDetail as $room) {
+                $roomTypeName = $room->room->roomTypes->name;
+                if (!isset($groupedRooms[$roomTypeName])) {
+                    $groupedRooms[$roomTypeName] = [
+                        'count' => 0,
+                        'price' => $room->room->roomTypes->price,
+                    ];
+                }
+                $groupedRooms[$roomTypeName]['count']++;
+            }
+        @endphp
+    
+        @foreach ($groupedRooms as $roomType => $data)
             <tr>
-                <td>{{ $room->room->room_number }}/{{ $room->room->roomTypes->name }}</td>
-                <td>Rp{{ number_format($room->room->roomTypes->price) }}</td>
-                <td>Rp{{ number_format($room->room->roomTypes->price * $dateLength) }}</td>
+                <td>{{ $roomType }}</td>
+                <td>{{ $data['count'] }}</td>
+                <td>Rp{{ number_format($data['price']) }}</td>
+                <td>Rp{{ number_format($data['price'] * $data['count'] * $dateLength) }}</td>
             </tr>
-            {{ $total += $room->room->roomTypes->price * $dateLength }}
+            {{ $total += $data['price'] * $data['count'] * $dateLength }}
         @endforeach
+    
         <tr>
             <td>Extra Bed</td>
-            <td>
+            <td colspan="2">
                 @if ($invoice->is_additional_bed == 1)
-                    yes
+                    Yes
                 @else
-                    no
+                    No
                 @endif
             </td>
             <td>
@@ -145,16 +164,14 @@
                 @endif
             </td>
         </tr>
+    
         <tr>
-            <td colspan="2">Penalty</td>
-            <td >Rp{{ number_format($invoice->fine_price) }}</td>
+            <td colspan="3">Penalty</td>
+            <td>Rp{{ number_format($invoice->fine_price) }}</td>
         </tr>
-        <!-- <tr>
-            <td>Additional Cost</td>
-            <td colspan="2">Rp{{ number_format($invoice->total_price + $invoice->fine_price - $total) }}</td>
-        </tr> -->
+    
         <tr>
-            <td colspan="2" style="text-align: center;">Total</td>
+            <td colspan="3" style="text-align: center;">Total</td>
             <td>Rp{{ number_format($invoice->total_price + $invoice->fine_price) }}</td>
         </tr>
     </table>

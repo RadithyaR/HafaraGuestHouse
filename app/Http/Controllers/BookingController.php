@@ -66,26 +66,6 @@ class BookingController extends Controller
         return view('home.book_room', compact('roomType', 'checkin_date', 'checkout_date', 'user'));
     }
 
-    private function generateCustomExternalId()
-    {
-        // Ambil external_id terakhir dari tabel payments
-        $lastPayment = Payment::orderBy('id', 'desc')->first();
-
-        if ($lastPayment) {
-            // Ambil angka dari external_id terakhir
-            $lastNumber = (int) substr($lastPayment->external_id, 4); // Misal: "pym-001" -> 001
-            $nextNumber = $lastNumber + 1;
-        } else {
-            // Jika tidak ada data, mulai dari 1
-            $nextNumber = 1;
-        }
-
-        // Format angka menjadi 3 digit (001, 002, dst)
-        $nextNumberFormatted = str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
-
-        return 'pym-' . $nextNumberFormatted;
-    }
-
     public function bookRoom(Request $request)
     {
         // Get the current logged-in user
@@ -96,6 +76,7 @@ class BookingController extends Controller
         $amountOfPrice = 0;
         $booking_ids = [];
         $payments = [];
+        $external_ids = [];
 
         // Get all cart items for the user
         $cartItems = Booking::with(['bookingDetail.room.roomTypes'])
@@ -152,6 +133,7 @@ class BookingController extends Controller
             }
 
             $external_id = 'pym-' . $cart->id;
+            $external_ids[] = $external_id;
             
             $payment = Payment::create([
                 'booking_id' => $cart->id,
@@ -178,14 +160,16 @@ class BookingController extends Controller
             ]);
         }
 
+        $external_ids = implode(',', $external_ids);
+        
         $createInvoice = new CreateInvoiceRequest([
-            'external_id' => $external_id,
+            'external_id' => $external_ids,
             'amount' => $amountOfPrice,
             'payer_email' => $email,
             'description' => 'Payment for booking ' . implode(', ', $booking_ids),
             'invoice_duration' => 7200,
-            'success_redirect_url' => route('payment.success', ['id' => $external_id]),
-            'failure_redirect_url' => route('payment.failure', ['id' => $external_id]),
+            'success_redirect_url' => route('payment.success', ['id' => $external_ids]),
+            'failure_redirect_url' => route('payment.failure', ['id' => $external_ids]),
         ]);
 
         $apiInstance = new InvoiceApi();
@@ -194,6 +178,7 @@ class BookingController extends Controller
             $payment->checkout_link = $generateInvoice['invoice_url'];
             $payment->save();
         }
+    
 
         // Show success message and redirect to cart page
         return redirect()->away($generateInvoice['invoice_url']);

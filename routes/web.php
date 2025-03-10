@@ -45,6 +45,9 @@ Route::get('/report/print_invoice/{id}', [AdminController::class, 'print_invoice
 Route::middleware(['auth','role:owner'])->group(function(){
     Route::get('/owner', [AdminController::class, 'owner']);
     Route::get('/bookings/export', [BookingController::class, 'export'])->name('bookings.export');
+    Route::get('/role', [AdminController::class, 'role']);
+    Route::post('/update_role', [AdminController::class, 'update_role'])->name('update_role');
+    Route::delete('/user/delete', [AdminController::class, 'deleteUser'])->name('delete_user');
 });
 
 Route::middleware(['auth'])->group(function(){
@@ -53,19 +56,20 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/contact', [HomeController::class, 'contact'])->name('contact');
     Route::get('/book_room/{id}/{checkin_date}/{checkout_date}', [BookingController::class, 'book'])->name('book_room');
 Route::post('/book-room', [BookingController::class, 'bookRoom'])->name('booking.bookRoom');
-});
 
-Route::post('/check-availability', [BookingController::class, 'checkAvailableRooms'])->name('check-availability');
+Route::post('/feedback/{id}', [FeedbackController::class, 'submit'])->name('feedback.submit');
 
 Route::post('/add_to_cart', [CartController::class, 'addToCart'])->name('add_to_cart');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+});
+
+Route::post('/check-availability', [BookingController::class, 'checkAvailableRooms'])->name('check-availability');
 
 Route::get('/rooms', [HomeController::class, 'room'])->name('rooms');
 Route::get('/room_details/{id}', [HomeController::class, 'room_details'])->name('room_details');
 Route::post('/add_booking/{id}', [HomeController::class, 'add_booking']);
 
 Route::get('/contact_us', [HomeController::class, 'contact_us'])->name('contact_us');
-Route::post('/feedback/{id}', [FeedbackController::class, 'submit'])->name('feedback.submit');
 
 Route::get('/about', [HomeController::class, 'about'])->name('about_us');
 

@@ -20,21 +20,27 @@ class PaymentController extends Controller
 
     public function success($id)
     {
-        $payment = Payment::where('external_id', $id)->first();
+        $id = explode(',', $id);
+        $payment = Payment::whereIn('external_id', $id)->get();
         if (!$payment) {
             return redirect()->route('home');
         }
 
+        $payment = $payment->first();
+        $payment->external_id = implode(',', $id);
         return view('payment.success', compact('payment'));
     }
 
     public function failure($id)
     {
-        $payment = Payment::where('external_id', $id)->first();
-
+        $id = explode(',', $id);
+        $payment = Payment::whereIn('external_id', $id)->get();
         if (!$payment) {
             return redirect()->route('home');
         }
+
+        $payment = $payment->first();
+        $payment->external_id = implode(',', $id);
 
         return view('payment.failure', compact('payment'));
     }

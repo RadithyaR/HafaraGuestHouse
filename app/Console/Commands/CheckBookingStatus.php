@@ -8,12 +8,12 @@ use Carbon\Carbon;
 class CheckBookingStatus extends Command
 {
     protected $signature = 'check:booking-status';
-    protected $description = 'Check bookings that have not been paid within 12 hours and cancel them';
+    protected $description = 'Check bookings that have not been paid within 2 hours and cancel them';
 
     public function handle()
     {
         $bookings = Booking::where('status', 'booked')
-            ->where('booking_time', '<', Carbon::now()->subHours(12))
+            ->where('booking_time', '<', Carbon::now()->subHours(2))
             ->get();
 
         foreach ($bookings as $booking) {

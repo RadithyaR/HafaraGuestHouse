@@ -21,7 +21,7 @@
             <span>Dashboard</span></a>
     </li>
 
-    @if (Auth::user()->role == 'admin')
+    @if (strtolower(Auth::user()->role->name) == 'admin')
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -88,13 +88,20 @@
     </li>
     @endif
 
-    @if (Auth::user()->role == 'owner')
+    @if (strtolower(Auth::user()->role->name) == 'owner')
     <li class="nav-item {{ Request::is('owner') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('owner') }}">
                 <i class="fas fa-fw bi bi-journal"></i>
                 <span>Report</span></a>
     </li>
+    @endif
 
+    @if (strtolower(Auth::user()->role->name) == 'owner')
+    <li class="nav-item {{ Request::is('role') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('role') }}">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Role Management</span></a>
+    </li>
     @endif
     <!-- Divider -->
     <hr class="sidebar-divider d-none ">
@@ -114,4 +121,3 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 </ul>
-<!-- End of Sidebar -->

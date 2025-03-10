@@ -33,7 +33,7 @@ class RoleMiddleware
     
         // Jika role yang diizinkan lebih dari satu
         $allowedRoles = explode('|', $role);
-        if (!in_array(Auth::user()->role, $allowedRoles)) {
+        if (!in_array(strtolower(Auth::user()->role->name), $allowedRoles)) {
             abort(403, 'Unauthorized role');
         }
 

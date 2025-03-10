@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Contact;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ class AdminController extends Controller
     public function home()
     {
         if (Auth::check()) {
-            $role = Auth::user()->role;
+            $role = strtolower(Auth::user()->role->name);
 
             if ($role === 'admin' || $role === 'owner') {
                 return redirect()->route('dashboard');
@@ -39,7 +40,7 @@ class AdminController extends Controller
 
         $bookings = Booking::with('user', 'bookingDetail.room.roomTypes', 'payment')->get();
 
-        return view('admin.index', compact('totalUsers', 'totalRooms', 'totalBookings', 'totalContacts','bookings'));
+        return view('admin.index', compact('totalUsers', 'totalRooms', 'totalBookings', 'totalContacts', 'bookings'));
     }
 
     public function bookings()
@@ -60,10 +61,53 @@ class AdminController extends Controller
 
     public function customer()
     {
-        $user = User::where('role', 'user')->get();
+        $user = User::where('role_id', 5)->get();
 
         return view('admin.customer', compact('user'));
     }
+
+    public function role()
+    {
+        $user = User::all();
+        $role = Role::all();
+
+        return view('admin.role_management', compact('user', 'role'));
+    }
+
+    public function update_role(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:users,id',
+            'role_id' => 'required|exists:roles,id',
+        ]);
+
+        try {
+            $user = User::findOrFail($request->id);
+            $user->role_id = $request->role_id;
+            $user->save();
+
+            return redirect()->back()->with('success', 'User role updated successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Failed to update user role. Please try again.']);
+        }
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:users,id',
+        ]);
+
+        try {
+            $user = User::findOrFail($request->id);
+            $user->delete();
+
+            return redirect()->back()->with('success', 'User deleted successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Failed to delete user. Please try again.']);
+        }
+    }
+
 
     public function owner()
     {
@@ -83,13 +127,13 @@ class AdminController extends Controller
             $filename = time() . '_' . $file->getClientOriginalName();
 
             $path = $file->storeAs('blob', $filename, 'public');
-            
+
             $users->blob_path = Storage::url($path);
             $users->save();
         }
 
-        $user = User::where('role', 'user')->get();
-        
+        $user = User::where('role', 5)->get();
+
         return view('admin.customer', compact('user'));
     }
 
@@ -104,7 +148,7 @@ class AdminController extends Controller
 
     public function print_invoice($id)
     {
-        $isAdmin = Auth::user()->role === 'admin';
+        $isAdmin = strtolower(Auth::user()->role->name) === 'admin';
         $isAllowed = Booking::where('id', $id)->where('user_id', Auth::id())->exists();
         if (!$isAdmin && !$isAllowed) {
             abort(403);
@@ -112,9 +156,9 @@ class AdminController extends Controller
         $invoice = Booking::with('user', 'bookingDetail.room.roomTypes', 'payment')
             ->where('id', $id)
             ->first();
-        
+
         $pdf = PDF::loadView('report.invoices.invoices', compact('invoice'));
 
-        return $pdf->download('invoice.pdf'); 
+        return $pdf->download('invoice.pdf');
     }
 }
