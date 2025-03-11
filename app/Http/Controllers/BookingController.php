@@ -178,7 +178,6 @@ class BookingController extends Controller
             $payment->checkout_link = $generateInvoice['invoice_url'];
             $payment->save();
         }
-    
 
         // Show success message and redirect to cart page
         return redirect()->away($generateInvoice['invoice_url']);

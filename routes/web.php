@@ -73,8 +73,6 @@ Route::get('/contact_us', [HomeController::class, 'contact_us'])->name('contact_
 
 Route::get('/about', [HomeController::class, 'about'])->name('about_us');
 
-Route::get('/payment', [PaymentController::class, 'index']);
-Route::post('create-invoice', [PaymentController::class, 'createInvoice'])->name('create-invoice');
 
 // route('payment.success', ['id' => $payment->id]),
 Route::get('/payment_success/{id}', [PaymentController::class, 'success'])->name('payment.success');
