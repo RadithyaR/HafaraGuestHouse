@@ -111,7 +111,9 @@ class AdminController extends Controller
 
     public function owner()
     {
-        $bookings = Booking::with('user', 'bookingDetail.room.roomTypes', 'payment')->get();
+        $bookings = Booking::with('user', 'bookingDetail.room.roomTypes', 'payment')
+        ->where('status', "checked_out")
+        ->get();
 
         return view('admin.owner', compact('bookings'));
     }
@@ -121,6 +123,10 @@ class AdminController extends Controller
         $users = User::find($request->id);
 
         if ($request->hasFile('customer_file')) {
+            //hapus file lama
+            if ($users->blob_path && Storage::disk('public')->exists($users->blob_path)) {
+                Storage::disk('public')->delete($users->blob_path);
+            }
 
             $file = $request->file('customer_file');
 
@@ -132,7 +138,7 @@ class AdminController extends Controller
             $users->save();
         }
 
-        $user = User::where('role', 5)->get();
+        $user = User::where('role_id', 5)->get();
 
         return view('admin.customer', compact('user'));
     }

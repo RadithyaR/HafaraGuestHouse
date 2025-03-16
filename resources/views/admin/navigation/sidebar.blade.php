@@ -45,13 +45,17 @@
             </div>
         </div>
     </li>
+    @endif
 
-<li class="nav-item {{ Request::is('bookings') ? 'active' : '' }}">
+    @if (strtolower(Auth::user()->role->name) == 'admin')
+    <li class="nav-item {{ Request::is('bookings') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.booking') }}">
             <i class="fas fa-fw bi bi-book-fill"></i>
             <span>Booking</span></a>
     </li>
+    @endif
 
+    
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -60,17 +64,19 @@
         Customer
     </div>
 
-<li class=" nav-item {{ Request::is('message') ? 'active' : '' }}">
+    <li class=" nav-item {{ Request::is('message') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('message') }}">
             <i class="fas fa-fw bi bi-envelope"></i>
             <span>Message</span></a>
     </li>
 
-<li class="nav-item {{ Request::is('customer') ? 'active' : '' }}">
+    @if (strtolower(Auth::user()->role->name) == 'admin')
+    <li class="nav-item {{ Request::is('customer') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('customer') }}">
             <i class="fas fa-fw bi bi-file-earmark-person"></i>
             <span>Customer</span></a>
     </li>
+    @endif
 
 <!-- Divider -->
     <hr class="sidebar-divider">
@@ -80,7 +86,7 @@
         Report
     </div>
 
-    
+    @if (strtolower(Auth::user()->role->name) == 'admin')
     <li class=" nav-item {{ Request::is('report') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('report') }}">
             <i class="fas fa-fw bi bi-journal"></i>
@@ -90,7 +96,7 @@
 
     @if (strtolower(Auth::user()->role->name) == 'owner')
     <li class="nav-item {{ Request::is('owner') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('owner') }}">
+            <a class="nav-link" href="{{ route('owner') }}">
                 <i class="fas fa-fw bi bi-journal"></i>
                 <span>Report</span></a>
     </li>

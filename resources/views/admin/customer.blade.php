@@ -60,7 +60,7 @@
                                                         onclick="showCustomerEdits('{{ $users->name }}', '{{ $users->email }}', '{{ $users->phone }}', {{ $users->id }}, '{{ $users->nik }}' , '{{ $users->alamat }}')"><i
                                                             class="bi bi-pencil-square"></i></button>
                                                 </td>
-                                                <!-- Modal -->
+                                                <!-- Modal customer detail -->
                                                 <div class="modal fade" id="customerDetailModal" tabindex="-1"
                                                     aria-labelledby="customerDetailModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
@@ -81,7 +81,7 @@
                                                                         id="modalCustomerPhone"></span></p>
                                                                 <!-- Link untuk file attachment -->
                                                                 <p><strong>Attachment: </strong>
-                                                                    <a href="" id="modalCustomerAttachment"
+                                                                    <a href="{{ $users->blob_path }}" id="modalCustomerAttachment"
                                                                         target="_blank">View File</a>
                                                                 </p>
                                                                 <p>
@@ -226,6 +226,18 @@
                 }
             });
         });
+
+        @foreach($user as $users)
+            const fileLink_{{ $users->id }} = document.getElementById('fileLink_{{ $users->id }}');
+            const fileUrl_{{ $users->id }} = "{{ $users->blob_path ?? '' }}";
+
+            if (!fileUrl_{{ $users->id }} || fileUrl_{{ $users->id }} === "#") {
+                // Nonaktifkan link jika tidak ada file
+                fileLink_{{ $users->id }}.href = "javascript:void(0)";
+                fileLink_{{ $users->id }}.classList.add('disabled-link');
+                fileLink_{{ $users->id }}.innerText = "No File Available";
+            }
+        @endforeach
     </script>
 </body>
 

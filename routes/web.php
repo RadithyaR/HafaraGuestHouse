@@ -34,7 +34,7 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('/bookings/detail-confirm/{id}', [BookingController::class, 'detailconfirm'])->name('admin.bookings.detailconfirm');
     Route::get('/bookings/detail-checkout/{id}', [BookingController::class, 'detailcheckout'])->name('admin.bookings.detailcheckout');
 
-    Route::get('/message', [AdminController::class, 'message']);
+    
     Route::get('/customer', [AdminController::class, 'customer']);
 
     Route::post('/update_user', [AdminController::class, 'update_user'])->name('update_user');
@@ -42,8 +42,10 @@ Route::middleware(['auth','role:admin'])->group(function(){
 });
 Route::get('/report/print_invoice/{id}', [AdminController::class, 'print_invoice'])->name('report.print_invoice');
 
+Route::get('/message', [AdminController::class, 'message'])->middleware(['auth','role:admin|owner']);
+
 Route::middleware(['auth','role:owner'])->group(function(){
-    Route::get('/owner', [AdminController::class, 'owner']);
+    Route::get('/report-owner', [AdminController::class, 'owner'])->name('owner');
     Route::get('/bookings/export', [BookingController::class, 'export'])->name('bookings.export');
     Route::get('/role', [AdminController::class, 'role']);
     Route::post('/update_role', [AdminController::class, 'update_role'])->name('update_role');
@@ -53,15 +55,17 @@ Route::middleware(['auth','role:owner'])->group(function(){
 Route::middleware(['auth'])->group(function(){
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::get('/history', [HomeController::class, 'history'])->name('history');
-    Route::post('/contact', [HomeController::class, 'contact'])->name('contact');
     Route::get('/book_room/{id}/{checkin_date}/{checkout_date}', [BookingController::class, 'book'])->name('book_room');
 Route::post('/book-room', [BookingController::class, 'bookRoom'])->name('booking.bookRoom');
+
 
 Route::post('/feedback/{id}', [FeedbackController::class, 'submit'])->name('feedback.submit');
 
 Route::post('/add_to_cart', [CartController::class, 'addToCart'])->name('add_to_cart');
 Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 });
+
+Route::post('/contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::post('/check-availability', [BookingController::class, 'checkAvailableRooms'])->name('check-availability');
 

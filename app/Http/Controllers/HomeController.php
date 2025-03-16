@@ -37,10 +37,9 @@ class HomeController extends Controller
         $contact->email = $request->email;
         $contact->phone = $request->phone;
         $contact->message = $request->message;
-        $contact->user_id = Auth::id();
         $contact->save();
 
-        return redirect()->back()->with('message', 'Message Sent Successfully');
+        return redirect()->back()->with('success' , 'Message sent successfully!');
     }
 
     public function contact_us()

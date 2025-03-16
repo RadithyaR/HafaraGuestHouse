@@ -17,6 +17,5 @@ class Contact extends Model
         'email',
         'phone',
         'message',
-        'user_id'
     ];
 }

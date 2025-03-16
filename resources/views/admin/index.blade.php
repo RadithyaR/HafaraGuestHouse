@@ -27,6 +27,7 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                @if (strtolower(Auth::user()->role->name) == 'admin')
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                     </div>
@@ -100,6 +101,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     @if (strtolower(Auth::user()->role->name) == 'owner')
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Graphic</h1>

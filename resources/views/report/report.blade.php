@@ -85,6 +85,7 @@
                                                 <th>User</th>
                                                 <th>Check-in</th>
                                                 <th>Check-out</th>
+                                                <th>Extra Bed</th>
                                                 <th>Harga Total</th>
                                                 <th>Fine Reason</th>
                                                 <th>Fine Price</th>
@@ -105,6 +106,7 @@
                                                     <td>{{ $booking->user->name }}</td>
                                                     <td>{{ $booking->checkin_date }}</td>
                                                     <td>{{ $booking->checkout_date }}</td>
+                                                    <td>{{ $booking->is_additional_bed ? 'Ya' : 'Tidak' }}</td>
                                                     <td>{{ $booking->total_price }}</td>
                                                     <td>{{ $booking->remarks ?? '-' }}</td>
                                                     <td>{{ $booking->fine_price ?? '-' }}</td>

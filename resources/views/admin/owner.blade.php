@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <title>Report Owner</title>
     @include('admin.css')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
@@ -28,8 +29,8 @@
                 <div class="container-fluid">
                     <div class="page-header">
                         <div class="container-fluid">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h2 class="h5 no-margin-bottom">Report</h2>
+                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                                <h1 class="h3 mb-0 text-gray-800">Report</h1>
                             </div>
                         </div>
                     </div>
@@ -68,12 +69,14 @@
                                             <th>User</th>
                                             <th>Check-in</th>
                                             <th>Check-out</th>
+                                            <th>Extra Bed</th>
                                             <th>Harga Total</th>
                                             <th>Fine Reason</th>
                                             <th>Fine Price</th>
                                             <th>Date</th>
                                             <th>Status</th>
                                             <th>Total</th>
+                                            <th>Feedback</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -88,6 +91,7 @@
                                                 <td>{{ $booking->user->name }}</td>
                                                 <td>{{ $booking->checkin_date }}</td>
                                                 <td>{{ $booking->checkout_date }}</td>
+                                                <td>{{ $booking->is_additional_bed ? 'Ya' : 'Tidak' }}</td>
                                                 <td>Rp{{ $booking->total_price }}</td>
                                                 <td>{{ $booking->remarks ?? '-' }}</td>
                                                 <td>Rp{{ $booking->fine_price ?? '-' }}</td>
@@ -95,6 +99,12 @@
                                                 </td>
                                                 <td>{{ $booking->status }}</td>
                                                 <td>Rp{{ $booking->total_price + $booking->fine_price }}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#feedbackModal{{ $booking->id }}">
+                                                        <i class="bi bi-star"></i> 
+                                                    </button>
+                                                    @include('modal.tampilfeedback')
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

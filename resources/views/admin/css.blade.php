@@ -4,7 +4,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Hafara - Dashboard</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.svg') }}">
+    <title>Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">

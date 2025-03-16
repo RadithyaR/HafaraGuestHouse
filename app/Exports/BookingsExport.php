@@ -31,7 +31,7 @@ class BookingsExport implements FromQuery, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            'Booking ID', 'User Name', 'Check-in', 'Check-out', 'Total Price', 'Fine Price', 'Total', 'Created At'
+            'Booking ID', 'User Name', 'Check-in', 'Check-out','Extra Bed', 'Total Price', 'Fine Price', 'Total', 'Created At'
         ];
     }
 
@@ -43,6 +43,7 @@ class BookingsExport implements FromQuery, WithHeadings, WithMapping
             $booking->user->name,
             $booking->checkin_date,
             $booking->checkout_date,
+            $booking->is_additional_bed ? 'Ya' : 'Tidak',
             $booking->total_price,
             $booking->fine_price ?? '-',
             $booking->total_price + $booking->fine_price,
